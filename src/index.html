@@ -54,7 +54,7 @@ function Vowelcount()
         }
     };
 
-    let url = vowelcountURL + "/?text=" + encodeURI(document.getElementById('content').value);
+    let url = vowelcountURL + "/?x=" + encodeURI(document.getElementById('content').value);
     xhttp.open("GET",url);
     xhttp.send();
 }
@@ -69,7 +69,7 @@ function Commacount()
         }
     };
 
-    let url = commacountURL + "/?text=" + encodeURI(document.getElementById('content').value);
+    let url = commacountURL + "/?key=" + encodeURI(document.getElementById('content').value);
     xhttp.open("GET",url);
     xhttp.send();
 }
@@ -84,7 +84,7 @@ function Andcount()
         }
     };
 
-    let url = andcountURL + "/?text=" + encodeURI(document.getElementById('content').value);
+    let url = andcountURL + "/x=" + encodeURI(document.getElementById('content').value);
     xhttp.open("GET",url);
     xhttp.send();
 }
