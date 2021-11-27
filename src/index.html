@@ -7,6 +7,11 @@
 
 let wordcountURL = "http://wordcount.editor.qpc.hal.davecutting.uk";
 let charcountURL = "http://charcount.editor.qpc.hal.davecutting.uk";
+let commacountURL = "http://gorestapi.40233306.qpc.hal.davecutting.uk";
+let vowelcountURL = "http://pythonrestapi.40233306.qpc.hal.davecutting.uk";
+let andcountURL = "http://rubyrestapi.40233306.qpc.hal.davecutting.uk";
+// javaurl - average word length
+
 
 
 function Wordcount()
@@ -35,6 +40,51 @@ function Charcount()
     };
 
     let url = charcountURL + "/?text=" + encodeURI(document.getElementById('content').value);
+    xhttp.open("GET",url);
+    xhttp.send();
+}
+
+function Vowelcount()
+{
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var j = JSON.parse(this.response);
+            document.getElementById('output').value = j.answer;
+        }
+    };
+
+    let url = vowelcountURL + "/?text=" + encodeURI(document.getElementById('content').value);
+    xhttp.open("GET",url);
+    xhttp.send();
+}
+
+function Commacount()
+{
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var j = JSON.parse(this.response);
+            document.getElementById('output').value = j.answer;
+        }
+    };
+
+    let url = commacountURL + "/?text=" + encodeURI(document.getElementById('content').value);
+    xhttp.open("GET",url);
+    xhttp.send();
+}
+
+function Andcount()
+{
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var j = JSON.parse(this.response);
+            document.getElementById('output').value = j.answer;
+        }
+    };
+
+    let url = andcountURL + "/?text=" + encodeURI(document.getElementById('content').value);
     xhttp.open("GET",url);
     xhttp.send();
 }
@@ -104,12 +154,12 @@ body  {
         <button class="operation" onclick="Charcount();">Character Count</button>
     </div>
     <div>
-        <button class="operation" onclick="">??</button>
-        <button class="operation" onclick="">??</button>
+        <button class="operation" onclick="Vowelcount();">Vowel Count</button>
+        <button class="operation" onclick="Commacount()">Comma Count</button>
     </div>
     <div>
-        <button class="operation" onclick="">??</button>
-        <button class="operation" onclick="">??</button>
+        <button class="operation" onclick="Andcount();">And Count</button>
+        <button class="operation" onclick="">AvgWordLength Count</button>
     </div>
     <div>
         <button class="operation" onclick="">??</button>
