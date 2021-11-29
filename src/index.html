@@ -137,6 +137,9 @@ body  {
 }
 </style>
 
+<!-- <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"> -->
+
+
 </head>
 <body>
 <div id="editor">
@@ -154,23 +157,353 @@ body  {
         <button class="operation" onclick="Charcount();">Character Count</button>
     </div>
     <div>
-        <button class="operation" onclick="Vowelcount();">Vowel Count</button>
-        <button class="operation" onclick="Commacount()">Comma Count</button>
+        <!-- <button class="operation" onclick="Vowelcount();">Vowel Count</button>
+        <button class="operation" onclick="Commacount()">Comma Count</button> -->
     </div>
     <div>
-        <button class="operation" onclick="Andcount();">And Count</button>
-        <button class="operation" onclick="">AvgWordLength Count</button>
+        <div class="container">
+            <button id="getData3" class="operation">fetch data And tester</button>
+            <button id="getData4" class="operation">filler tester</button>           
+        </div> 
     </div>
     <div>
-        <button class="operation" onclick="">??</button>
-        <button class="operation" onclick="">??</button>
-    </div>
-    <div>
-        <button class="operation" onclick="">??</button>
-        <button class="operation" onclick="">??</button>
-    </div>
-    
+        <div class="container">
+            <button id="getData" class="operation">fetch data comma tester</button>
+            <button id="getData2" class="operation">fetch data vowel tester</button>        
+            <div id="loader" style="margin-top: 10px; display: none;">
+                <img src="ajax-loader.gif">
+            </div>      
+        </div> 
+    </div> 
 </div>
+
+<script src="jquery-3.6.0.min.js"></script>
+<!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+<script>
+    $(document).ready(function(){
+
+        $("#getData").on("click",function(){
+            let xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            var j = JSON.parse(this.response);
+                            document.getElementById('output').value = j.answer;
+                        }
+                    };
+                    
+                    let url2 = commacountURL + "/?key=" + encodeURI(document.getElementById('content').value);
+                    
+            $.ajax({
+                type:"GET",
+                url:url2,
+                dataType:"json",
+
+                beforeSend: function(){
+                    $("#loader").show();
+                    $("#getData2").hide();
+                    $("#getData3").hide();
+                    $("#getData4").hide();
+                },
+
+
+                complete: function(){
+                    setTimeout(function(){
+                    $("#loader").hide();
+                    $("#getData2").show();
+                    $("#getData3").show();
+                    $("#getData4").show();
+                    },1000);
+                },
+                
+                success: function(data){
+                        let xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            var j = JSON.parse(this.response);
+                            document.getElementById('output').value = j.answer;
+                        }
+                    };
+                    
+                    let url = commacountURL + "/?key=" + encodeURI(document.getElementById('content').value);
+                    
+                    xhttp.open("GET",url);
+                    xhttp.send();
+                    
+                   /*  var output = "";
+                    for(var i in data){
+                        output +=`
+                            <ul>
+                                <li>Id ${data[i].id}</li>
+                                    <li>Name ${data[i].name}</li>
+                                        <li>Username ${data[i].username}</li>
+                            </ul>
+                        `;
+                    }
+
+                     *///$("#result").html(output);
+                  //  M.toast({
+                   //     html:'Fetched successfully',
+                   //     classes:'green'
+                   // });
+                },
+
+                error: function(){
+                    $("#result").html("error failed to get data");
+                   // M.toast({
+                    //    html:'Failed to get data',
+                   //     classes:'red'
+                  // });
+                }
+            });
+
+        });
+
+
+    });
+</script>
+<script>
+    $(document).ready(function(){
+
+        $("#getData2").on("click",function(){
+            let xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            var j = JSON.parse(this.response);
+                            document.getElementById('output').value = j.answer;
+                        }
+                    };
+                    
+                    let url2 = vowelcountURL + "/?x=" + encodeURI(document.getElementById('content').value);
+
+            $.ajax({
+                type:"GET",
+                url:url2,
+                dataType:"json",
+
+                beforeSend: function(){
+                    $("#loader").show();
+                    $("#getData").hide();
+                    $("#getData3").hide();
+                    $("#getData4").hide();
+                },
+
+                complete: function(){
+                    setTimeout(function(){
+                    $("#loader").hide();
+                    $("#getData").show();
+                    $("#getData3").show();
+                    $("#getData4").show();
+                    },1000);
+                },
+
+                success: function(data){
+                    let xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            var j = JSON.parse(this.response);
+                            document.getElementById('output').value = j.answer;
+                        }
+                    };
+                    
+                    let url = vowelcountURL + "/?x=" + encodeURI(document.getElementById('content').value);
+                    xhttp.open("GET",url);
+                    xhttp.send();
+                   /*  var output = "";
+                    for(var i in data){
+                        output +=`
+                            <ul>
+                                <li>Id ${data[i].id}</li>
+                                    <li>Name ${data[i].name}</li>
+                                        <li>Username ${data[i].username}</li>
+                            </ul>
+                        `;
+                    }
+
+                     *///$("#result").html(output);
+                  //  M.toast({
+                   //     html:'Fetched successfully',
+                   //     classes:'green'
+                   // });
+                },
+
+                error: function(){
+                    $("#result").html("error failed to get data");
+                   // M.toast({
+                    //    html:'Failed to get data',
+                   //     classes:'red'
+                  // });
+                }
+            });
+
+        });
+
+
+    });
+</script>
+<script>
+    $(document).ready(function(){
+
+        $("#getData3").on("click",function(){
+            let xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            var j = JSON.parse(this.response);
+                            document.getElementById('output').value = j.answer;
+                        }
+                    };
+                    
+                    let url2 = andcountURL + "/x=" + encodeURI(document.getElementById('content').value);
+                    
+            $.ajax({
+                type:"GET",
+                url:url2,
+                dataType:"json",
+
+                beforeSend: function(){
+                    $("#loader").show();
+                    $("#getData2").hide();
+                    $("#getData").hide();
+                    $("#getData4").hide();
+                },
+
+
+                complete: function(){
+                    setTimeout(function(){
+                    $("#loader").hide();
+                    $("#getData2").show();
+                    $("#getData").show();
+                    $("#getData4").show();
+                    },1000);
+                },
+                
+                success: function(data){
+                        let xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            var j = JSON.parse(this.response);
+                            document.getElementById('output').value = j.answer;
+                        }
+                    };
+                    
+                    let url = andcountURL + "/x=" + encodeURI(document.getElementById('content').value);
+                    
+                    xhttp.open("GET",url);
+                    xhttp.send();
+                    
+                   /*  var output = "";
+                    for(var i in data){
+                        output +=`
+                            <ul>
+                                <li>Id ${data[i].id}</li>
+                                    <li>Name ${data[i].name}</li>
+                                        <li>Username ${data[i].username}</li>
+                            </ul>
+                        `;
+                    }
+
+                     *///$("#result").html(output);
+                  //  M.toast({
+                   //     html:'Fetched successfully',
+                   //     classes:'green'
+                   // });
+                },
+
+                error: function(){
+                    $("#result").html("error failed to get data");
+                   // M.toast({
+                    //    html:'Failed to get data',
+                   //     classes:'red'
+                  // });
+                }
+            });
+
+        });
+
+
+    });
+</script>
+<!-- <script>
+    $(document).ready(function(){
+
+        $("#getData").on("click",function(){
+            let xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            var j = JSON.parse(this.response);
+                            document.getElementById('output').value = j.answer;
+                        }
+                    };
+                    
+                    let url2 = commacountURL + "/?key=" + encodeURI(document.getElementById('content').value);
+                    
+            $.ajax({
+                type:"GET",
+                url:url2,
+                dataType:"json",
+
+                beforeSend: function(){
+                    $("#loader").show();
+                    $("#getData2").hide();
+                    $("#getData3").hide();
+                    $("#getData4").hide();
+                },
+
+
+                complete: function(){
+                    setTimeout(function(){
+                    $("#loader").hide();
+                    $("#getData2").show();
+                    $("#getData3").show();
+                    $("#getData4").show();
+                    },1000);
+                },
+                
+                success: function(data){
+                        let xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            var j = JSON.parse(this.response);
+                            document.getElementById('output').value = j.answer;
+                        }
+                    };
+                    
+                    let url = commacountURL + "/?key=" + encodeURI(document.getElementById('content').value);
+                    
+                    xhttp.open("GET",url);
+                    xhttp.send();
+                    
+                   /*  var output = "";
+                    for(var i in data){
+                        output +=`
+                            <ul>
+                                <li>Id ${data[i].id}</li>
+                                    <li>Name ${data[i].name}</li>
+                                        <li>Username ${data[i].username}</li>
+                            </ul>
+                        `;
+                    }
+
+                     *///$("#result").html(output);
+                  //  M.toast({
+                   //     html:'Fetched successfully',
+                   //     classes:'green'
+                   // });
+                },
+
+                error: function(){
+                    $("#result").html("error failed to get data");
+                   // M.toast({
+                    //    html:'Failed to get data',
+                   //     classes:'red'
+                  // });
+                }
+            });
+
+        });
+
+
+    });
+</script> -->
 </body>
 
 
