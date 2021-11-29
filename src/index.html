@@ -12,6 +12,12 @@ let vowelcountURL = "http://pythonrestapi.40233306.qpc.hal.davecutting.uk";
 let andcountURL = "http://rubyrestapi.40233306.qpc.hal.davecutting.uk";
 // javaurl - average word length
 
+function handleErrors(response) {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+    return response;
+}
 
 
 function Wordcount()
@@ -25,8 +31,25 @@ function Wordcount()
     };
 
     let url = wordcountURL + "/?text=" + encodeURI(document.getElementById('content').value);
-    xhttp.open("GET",url);
-    xhttp.send();
+
+    /* try {
+        xhttp.open("GET",url);
+        xhttp.send();
+    } catch (e) {
+        console.log(e instanceof URIError)  // true
+        console.log(e.message)
+    } */
+
+    fetch(url)
+    .then(handleErrors)
+    .then(function(response) {
+        xhttp.open("GET",url);
+        xhttp.send();
+    }).catch(function(error) {
+        console.log(error);
+    });
+
+
 }
 
 function Charcount()
