@@ -5,12 +5,15 @@
 
 <script type="text/javascript">
 
-let wordcountURL = "http://wordcount.editor.qpc.hal.davecutting.uk";
-let charcountURL = "http://charcount.editor.qpc.hal.davecutting.uk";
+//let wordcountURL = "http://wordcount.editor.qpc.hal.davecutting.uk";
+let wordcountURL = "http://wordcountapi.40233306.qpc.hal.davecutting.uk";
+//let wordcountURL2 = urlHolder.Wordcount;
+//let charcountURL = "http://charcount.editor.qpc.hal.davecutting.uk";
+let charcountURL = "http://charcountapi.40233306.qpc.hal.davecutting.uk";
 let commacountURL = "http://gorestapi.40233306.qpc.hal.davecutting.uk";
 let vowelcountURL = "http://pythonrestapi.40233306.qpc.hal.davecutting.uk";
 let andcountURL = "http://rubyrestapi.40233306.qpc.hal.davecutting.uk";
-// javaurl - average word length
+let avgwordlengthURL = "http://javarestapi.40233306.qpc.hal.davecutting.uk";
 
 function handleErrors(response) {
     if (!response.ok) {
@@ -26,28 +29,46 @@ function Wordcount()
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var j = JSON.parse(this.response);
-            document.getElementById('output').value = j.answer;
-        }
+            document.getElementById('output').value = j.answer;        
+        }   
     };
 
     let url = wordcountURL + "/?text=" + encodeURI(document.getElementById('content').value);
-
-    /* try {
-        xhttp.open("GET",url);
-        xhttp.send();
-    } catch (e) {
-        console.log(e instanceof URIError)  // true
-        console.log(e.message)
-    } */
-
-    fetch(url)
+   // if(handler == 0)
+  //  {
+   //     xhttp.open("GET",url);
+   //     xhttp.send();
+  //  }
+   // else{  
+            fetch(url)
     .then(handleErrors)
     .then(function(response) {
         xhttp.open("GET",url);
         xhttp.send();
-    }).catch(function(error) {
-        console.log(error);
-    });
+    }).catch(function (error) {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+     // console.log('1', error.message);
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      //console.log('2', error.message);
+      console.log(error.request);
+      console.log(error.response.status);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      //console.log('3', error.message);
+      console.log('Error', error.message);
+      console.log('Error status 404');
+    }
+    //console.log('4', error.message);
+    //console.log(error.config);
+  });
+
+   // }
+        
 
 
 }
@@ -63,8 +84,27 @@ function Charcount()
     };
 
     let url = charcountURL + "/?text=" + encodeURI(document.getElementById('content').value);
-    xhttp.open("GET",url);
-    xhttp.send();
+    fetch(url)
+    .then(handleErrors)
+    .then(function(response) {
+        xhttp.open("GET",url);
+        xhttp.send();
+    }).catch(function (error) {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      console.log(error.request);
+      console.log(error.response.status);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
+      console.log('Error status 404');
+    }
+  });
 }
 
 function Vowelcount()
@@ -108,6 +148,21 @@ function Andcount()
     };
 
     let url = andcountURL + "/x=" + encodeURI(document.getElementById('content').value);
+    xhttp.open("GET",url);
+    xhttp.send();
+}
+
+function avgwordlengthcount()
+{
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var j = JSON.parse(this.response);
+            document.getElementById('output').value = j.answer;
+        }
+    };
+
+    let url = avgwordlengthURL + "/?sentence=" + encodeURI(document.getElementById('content').value);
     xhttp.open("GET",url);
     xhttp.send();
 }
@@ -178,6 +233,7 @@ body  {
     <div>
         <button class="operation" onclick="Wordcount();">Word Count</button>
         <button class="operation" onclick="Charcount();">Character Count</button>
+        <!-- <button class="operation" onclick="getURL();">Character Count</button> -->
     </div>
     <div>
         <!-- <button class="operation" onclick="Vowelcount();">Vowel Count</button>
@@ -198,6 +254,9 @@ body  {
             </div>      
         </div> 
     </div> 
+    <div>
+        <button class="operation" onclick="avgwordlengthcount();">avg word length Count</button>
+    </div>
 </div>
 
 <script src="jquery-3.6.0.min.js"></script>
