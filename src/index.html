@@ -231,9 +231,11 @@ body  {
         <input type="text" id="output" readonly="1" value="" />
     </div>
     <div>
-        <button class="operation" onclick="Wordcount();">Word Count</button>
-        <button class="operation" onclick="Charcount();">Character Count</button>
+        <div class="container">
+        <button id="getData5" class="operation" onclick="Wordcount();">Word Count</button>
+        <button id="getData6" class="operation" onclick="Charcount();">Character Count</button>
         <!-- <button class="operation" onclick="getURL();">Character Count</button> -->
+    </div>
     </div>
     <div>
         <!-- <button class="operation" onclick="Vowelcount();">Vowel Count</button>
@@ -242,7 +244,7 @@ body  {
     <div>
         <div class="container">
             <button id="getData3" class="operation">fetch data And tester</button>
-            <button id="getData4" class="operation">filler tester</button>           
+            <button id="getData4" class="operation" onclick="avgwordlengthcount();">fetch data avg word tester</button>           
         </div> 
     </div>
     <div>
@@ -254,9 +256,6 @@ body  {
             </div>      
         </div> 
     </div> 
-    <div>
-        <button class="operation" onclick="avgwordlengthcount();">avg word length Count</button>
-    </div>
 </div>
 
 <script src="jquery-3.6.0.min.js"></script>
@@ -283,8 +282,11 @@ body  {
                 beforeSend: function(){
                     $("#loader").show();
                     $("#getData2").hide();
-                    $("#getData3").hide();
+                    $("#getData").hide();
                     $("#getData4").hide();
+                    $("#getData6").hide();
+                    $("#getData3").hide();
+                    $("#getData5").hide();
                 },
 
 
@@ -292,8 +294,11 @@ body  {
                     setTimeout(function(){
                     $("#loader").hide();
                     $("#getData2").show();
-                    $("#getData3").show();
+                    $("#getData").show();
                     $("#getData4").show();
+                    $("#getData6").show();
+                    $("#getData3").show();
+                    $("#getData5").show();
                     },1000);
                 },
                 
@@ -364,17 +369,23 @@ body  {
 
                 beforeSend: function(){
                     $("#loader").show();
+                    $("#getData2").hide();
                     $("#getData").hide();
-                    $("#getData3").hide();
                     $("#getData4").hide();
+                    $("#getData6").hide();
+                    $("#getData3").hide();
+                    $("#getData5").hide();
                 },
 
                 complete: function(){
                     setTimeout(function(){
                     $("#loader").hide();
+                    $("#getData2").show();
                     $("#getData").show();
-                    $("#getData3").show();
                     $("#getData4").show();
+                    $("#getData6").show();
+                    $("#getData3").show();
+                    $("#getData5").show();
                     },1000);
                 },
 
@@ -390,30 +401,12 @@ body  {
                     let url = vowelcountURL + "/?x=" + encodeURI(document.getElementById('content').value);
                     xhttp.open("GET",url);
                     xhttp.send();
-                   /*  var output = "";
-                    for(var i in data){
-                        output +=`
-                            <ul>
-                                <li>Id ${data[i].id}</li>
-                                    <li>Name ${data[i].name}</li>
-                                        <li>Username ${data[i].username}</li>
-                            </ul>
-                        `;
-                    }
-
-                     *///$("#result").html(output);
-                  //  M.toast({
-                   //     html:'Fetched successfully',
-                   //     classes:'green'
-                   // });
+                   
                 },
 
                 error: function(){
                     $("#result").html("error failed to get data");
-                   // M.toast({
-                    //    html:'Failed to get data',
-                   //     classes:'red'
-                  // });
+                   
                 }
             });
 
@@ -446,6 +439,9 @@ body  {
                     $("#getData2").hide();
                     $("#getData").hide();
                     $("#getData4").hide();
+                    $("#getData6").hide();
+                    $("#getData3").hide();
+                    $("#getData5").hide();
                 },
 
 
@@ -455,6 +451,9 @@ body  {
                     $("#getData2").show();
                     $("#getData").show();
                     $("#getData4").show();
+                    $("#getData6").show();
+                    $("#getData3").show();
+                    $("#getData5").show();
                     },1000);
                 },
                 
@@ -472,30 +471,12 @@ body  {
                     xhttp.open("GET",url);
                     xhttp.send();
                     
-                   /*  var output = "";
-                    for(var i in data){
-                        output +=`
-                            <ul>
-                                <li>Id ${data[i].id}</li>
-                                    <li>Name ${data[i].name}</li>
-                                        <li>Username ${data[i].username}</li>
-                            </ul>
-                        `;
-                    }
-
-                     *///$("#result").html(output);
-                  //  M.toast({
-                   //     html:'Fetched successfully',
-                   //     classes:'green'
-                   // });
+                   
                 },
 
                 error: function(){
                     $("#result").html("error failed to get data");
-                   // M.toast({
-                    //    html:'Failed to get data',
-                   //     classes:'red'
-                  // });
+                   
                 }
             });
 
@@ -504,30 +485,29 @@ body  {
 
     });
 </script>
-<!-- <script>
+<script>
     $(document).ready(function(){
 
-        $("#getData").on("click",function(){
-            let xhttp = new XMLHttpRequest();
-                    xhttp.onreadystatechange = function() {
-                        if (this.readyState == 4 && this.status == 200) {
-                            var j = JSON.parse(this.response);
-                            document.getElementById('output').value = j.answer;
-                        }
-                    };
+        $("#getData5").on("click",function(){
+            
+
+                let url = wordcountURL + "/?text=" + encodeURI(document.getElementById('content').value);
+                
+                            
                     
-                    let url2 = commacountURL + "/?key=" + encodeURI(document.getElementById('content').value);
-                    
-            $.ajax({
+                $.ajax({
                 type:"GET",
-                url:url2,
+                url:url,
                 dataType:"json",
 
                 beforeSend: function(){
                     $("#loader").show();
                     $("#getData2").hide();
-                    $("#getData3").hide();
+                    $("#getData").hide();
                     $("#getData4").hide();
+                    $("#getData6").hide();
+                    $("#getData3").hide();
+                    $("#getData5").hide();
                 },
 
 
@@ -535,49 +515,22 @@ body  {
                     setTimeout(function(){
                     $("#loader").hide();
                     $("#getData2").show();
-                    $("#getData3").show();
+                    $("#getData").show();
                     $("#getData4").show();
+                    $("#getData6").show();
+                    $("#getData3").show();
+                    $("#getData5").show();
                     },1000);
                 },
                 
                 success: function(data){
-                        let xhttp = new XMLHttpRequest();
-                    xhttp.onreadystatechange = function() {
-                        if (this.readyState == 4 && this.status == 200) {
-                            var j = JSON.parse(this.response);
-                            document.getElementById('output').value = j.answer;
-                        }
-                    };
-                    
-                    let url = commacountURL + "/?key=" + encodeURI(document.getElementById('content').value);
-                    
-                    xhttp.open("GET",url);
-                    xhttp.send();
-                    
-                   /*  var output = "";
-                    for(var i in data){
-                        output +=`
-                            <ul>
-                                <li>Id ${data[i].id}</li>
-                                    <li>Name ${data[i].name}</li>
-                                        <li>Username ${data[i].username}</li>
-                            </ul>
-                        `;
-                    }
+                        
 
-                     *///$("#result").html(output);
-                  //  M.toast({
-                   //     html:'Fetched successfully',
-                   //     classes:'green'
-                   // });
+        
                 },
 
                 error: function(){
-                    $("#result").html("error failed to get data");
-                   // M.toast({
-                    //    html:'Failed to get data',
-                   //     classes:'red'
-                  // });
+                   
                 }
             });
 
@@ -585,7 +538,55 @@ body  {
 
 
     });
-</script> -->
+</script>
+<script>
+    $(document).ready(function(){
+
+        $("#getData4").on("click",function(){
+    
+
+            let url = avgwordlengthURL + "/?sentence=" + encodeURI(document.getElementById('content').value);
+            
+                       
+            $.ajax({
+            type:"GET",
+            url:url,
+            dataType:"json",
+
+            beforeSend: function(){
+                $("#loader").show();
+                $("#getData2").hide();
+                $("#getData").hide();
+                $("#getData4").hide();
+                $("#getData6").hide();
+                $("#getData3").hide();
+                $("#getData5").hide();
+            },
+
+            complete: function(){
+                setTimeout(function(){
+                $("#loader").hide();
+                $("#getData2").show();
+                $("#getData").show();
+                $("#getData4").show();
+                $("#getData6").show();
+                $("#getData3").show();
+                $("#getData5").show();
+                },1000);
+            },
+            
+            success: function(data){
+            },
+
+            error: function(){
+            }
+        });
+
+    });
+
+
+});
+</script> 
 </body>
 
 
