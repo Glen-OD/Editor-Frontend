@@ -5,8 +5,9 @@
 
 <script type="text/javascript">
 
+
 //let wordcountURL = "http://wordcount.editor.qpc.hal.davecutting.uk";
-let wordcountURL = "http://wordcountapi.40233306.qpc.hal.davecutting.uk";
+//let wordcountURL = "http://wordcountapi.40233306.qpc.hal.davecutting.uk";
 //let wordcountURL2 = urlHolder.Wordcount;
 //let charcountURL = "http://charcount.editor.qpc.hal.davecutting.uk";
 let charcountURL = "http://charcountapi.40233306.qpc.hal.davecutting.uk";
@@ -176,7 +177,46 @@ function avgwordlengthcount()
     xhttp.send();
 }
 
+//define(['require','./urlHolder.json'], function(require) {
+//    
+//    var json = require('./urlHolder.json');
+ //   console.log(json);
 
+
+    //$.getJSON("./urlHolder.json", function(json) {
+    //    console.log(json); // this will show the info it in firebug console
+    //});
+//});
+
+const loadJSON = (callback) => {
+  const xObj = new XMLHttpRequest();
+  xObj.overrideMimeType("application/json");
+  // 1. replace './data.json' with the local path of your file
+  xObj.open('GET', './urlHolder.json', true);
+  xObj.onreadystatechange = () => {
+      if (xObj.readyState === 4 && xObj.status === 200) {
+          // 2. call your callback function
+          callback(xObj.responseText);
+      }
+  };
+  xObj.send(null);
+}
+
+const init = () => {
+  loadJSON((response) => {
+      // 3. parse JSON string into JSON Object
+      console.log('response =', response);
+      const json = JSON.parse(response);
+      console.log('your local JSON =', JSON.stringify(json, null, 4));
+      // 4. render to your page
+      const app = document.querySelector('#app');
+      app.innerHTML = `<pre>${JSON.stringify(json, null, 4)}</pre>`;
+  });
+}
+
+</script>
+
+<script src = "./require.js">
 </script>
 
 <style type="text/css">
@@ -228,7 +268,7 @@ body  {
 
 
 </head>
-<body>
+<body>    
 <div id="editor">
     <div id="logo">
         QUBeditotron3000
@@ -244,7 +284,10 @@ body  {
         <button id="getData5" class="operation" onclick="Wordcount();">Word Count</button>
         <button id="getData6" class="operation" onclick="Charcount();">Character Count</button>
         <!-- <button class="operation" onclick="getURL();">Character Count</button> -->
+        </div>
     </div>
+    <div>
+        <button class="operation" onclick="init();">url getter</button>
     </div>
     <div>
         <!-- <button class="operation" onclick="Vowelcount();">Vowel Count</button>
@@ -266,6 +309,53 @@ body  {
         </div> 
     </div> 
 </div>
+<form id="jsonFile" name="jsonFile" enctype="multipart/form-data" method="post">
+
+    <fieldset>
+      <h2>Json File</h2>
+       <input type='file' id='fileinput'>
+       <input type='button' id='btnLoad' value='Load' onclick='loadFile();'>
+    </fieldset>
+  </form>
+  
+  
+  <script type="text/javascript">
+  
+    function loadFile() {
+      var input, file, fr;
+  
+      if (typeof window.FileReader !== 'function') {
+        alert("The file API isn't supported on this browser yet.");
+        return;
+      }
+  
+      input = document.getElementById('fileinput');
+      if (!input) {
+        alert("Um, couldn't find the fileinput element.");
+      }
+      else if (!input.files) {
+        alert("This browser doesn't seem to support the `files` property of file inputs.");
+      }
+      else if (!input.files[0]) {
+        alert("Please select a file before clicking 'Load'");
+      }
+      else {
+        file = input.files[0];
+        fr = new FileReader();
+        fr.onload = receivedText;
+        fr.readAsText(file);
+      }
+  
+      function receivedText(e) {
+        let lines = e.target.result;
+        var newArr = JSON.parse(lines); 
+        console.log(newArr);
+        var output = "";
+        output +=`${newArr.wordcount}`;
+        console.log(output);
+      }
+    }
+  </script>
 
 <script src="jquery-3.6.0.min.js"></script>
 <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
