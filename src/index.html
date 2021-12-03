@@ -29,7 +29,12 @@ function Wordcount()
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var j = JSON.parse(this.response);
-            document.getElementById('output').value = j.answer;        
+            document.getElementById('output').value = j.answer;
+            if (j.error == true)
+            {
+                console.log('Error = True. Default value 0 set to screen');
+            }
+
         }   
     };
 
@@ -80,6 +85,10 @@ function Charcount()
         if (this.readyState == 4 && this.status == 200) {
             var j = JSON.parse(this.response);
             document.getElementById('output').value = j.answer;
+            if (j.error == true)
+            {
+                console.log('Error = True. Default value 0 set to screen');
+            }
         }
     };
 
@@ -490,49 +499,47 @@ body  {
 
         $("#getData5").on("click",function(){
             
-
-                let url = wordcountURL + "/?text=" + encodeURI(document.getElementById('content').value);
+            let url = wordcountURL + "/?text=" + encodeURI(document.getElementById('content').value);
                 
-                            
+                  
+                    $.ajax({
+                    type:"GET",
+                    url:url,
+                    dataType:"json",
+
+                    beforeSend: function(){
+                        $("#loader").show();
+                        $("#getData2").hide();
+                        $("#getData").hide();
+                        $("#getData4").hide();
+                        $("#getData6").hide();
+                        $("#getData3").hide();
+                        $("#getData5").hide();
+                    },
+
+
+                    complete: function(){
+                        setTimeout(function(){
+                        $("#loader").hide();
+                        $("#getData2").show();
+                        $("#getData").show();
+                        $("#getData4").show();
+                        $("#getData6").show();
+                        $("#getData3").show();
+                        $("#getData5").show();
+                        },1000);
+                    },
                     
-                $.ajax({
-                type:"GET",
-                url:url,
-                dataType:"json",
+                    success: function(data){
+                            
 
-                beforeSend: function(){
-                    $("#loader").show();
-                    $("#getData2").hide();
-                    $("#getData").hide();
-                    $("#getData4").hide();
-                    $("#getData6").hide();
-                    $("#getData3").hide();
-                    $("#getData5").hide();
-                },
+            
+                    },
 
-
-                complete: function(){
-                    setTimeout(function(){
-                    $("#loader").hide();
-                    $("#getData2").show();
-                    $("#getData").show();
-                    $("#getData4").show();
-                    $("#getData6").show();
-                    $("#getData3").show();
-                    $("#getData5").show();
-                    },1000);
-                },
-                
-                success: function(data){
-                        
-
-        
-                },
-
-                error: function(){
-                   
-                }
-            });
+                    error: function(){
+                    
+                    }
+                    });
 
         });
 
@@ -586,6 +593,61 @@ body  {
 
 
 });
+</script>
+<script>
+    $(document).ready(function(){
+
+        $("#getData6").on("click",function(){
+            
+
+           
+            let url = charcountURL + "/?text=" + encodeURI(document.getElementById('content').value);
+            
+           
+                $.ajax({
+                type:"GET",
+                url:url,
+                dataType:"json",
+
+                beforeSend: function(){
+                    $("#loader").show();
+                    $("#getData2").hide();
+                    $("#getData").hide();
+                    $("#getData4").hide();
+                    $("#getData6").hide();
+                    $("#getData3").hide();
+                    $("#getData5").hide();
+                },
+
+
+                complete: function(){
+                    setTimeout(function(){
+                    $("#loader").hide();
+                    $("#getData2").show();
+                    $("#getData").show();
+                    $("#getData4").show();
+                    $("#getData6").show();
+                    $("#getData3").show();
+                    $("#getData5").show();
+                    },1000);
+                },
+                
+                success: function(data){
+                        
+
+        
+                },
+
+                error: function(){
+                   
+                }
+            });
+                 
+
+        });
+
+
+    });
 </script> 
 </body>
 
