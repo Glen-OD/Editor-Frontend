@@ -98,7 +98,7 @@ function Charcount()
         }
     };
 
-    let url = charcountURL + "/?text=" + encodeURI(document.getElementById('content').value);
+    let url = `/test?text=${encodeURI(document.getElementById('content').value)}`;
     fetch(url)
     .then(handleErrors)
     .then(function(response) {
@@ -703,7 +703,7 @@ body  {
             
 
            
-            let url = charcountURL + "/?text=" + encodeURI(document.getElementById('content').value);
+            let url = `/test?text=${encodeURI(document.getElementById('content').value)}`;
             
            
                 $.ajax({
