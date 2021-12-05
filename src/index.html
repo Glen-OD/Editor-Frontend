@@ -5,6 +5,7 @@
 
 <script type="text/javascript">
 
+//import m from './urlHolder.json';
 
 //let wordcountURL = "http://wordcount.editor.qpc.hal.davecutting.uk";
 let wordcountURL = "http://wordcountapi.40233306.qpc.hal.davecutting.uk";
@@ -26,6 +27,10 @@ function handleErrors(response) {
 
 function Wordcount()
 {
+   // fetch('./urlHolder.json')
+  // .then(response => response.json())
+  // .then(obj => console.log(obj))
+      
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -38,9 +43,9 @@ function Wordcount()
 
         }   
     };
-
-    let url = wordcountURL + "/?text=" + encodeURI(document.getElementById('content').value);
-   // if(handler == 0)
+    //let url = window.wordcount + "/?text=" + encodeURI(document.getElementById('content').value);
+    let url = `/api?text=${encodeURI(document.getElementById('content').value)}`;    
+    // if(handler == 0)
   //  {
    //     xhttp.open("GET",url);
    //     xhttp.send();
@@ -275,6 +280,7 @@ body  {
     </div>
     <div>
         <textarea rows="5" cols="40" id="content">It was the best of cloud, it was the worst of cloud...</textarea>
+        <a id="myLink"></a>
     </div>
     <div>
         <input type="text" id="output" readonly="1" value="" />
@@ -352,9 +358,15 @@ body  {
         console.log(newArr);
         var output = "";
         output +=`${newArr.wordcount}`;
-        console.log(output);
-      }
+        window.wordcount = output;
+
+        
+       //when the document is finished loading, replace everything
+       //between the <a ...> </a> tags with the value of splitText
+        //document.getElementById("myLink").value=newArr;
+        } 
     }
+  
   </script>
 
 <script src="jquery-3.6.0.min.js"></script>
@@ -589,7 +601,7 @@ body  {
 
         $("#getData5").on("click",function(){
             
-            let url = wordcountURL + "/?text=" + encodeURI(document.getElementById('content').value);
+            let url = `/api?text=${encodeURI(document.getElementById('content').value)}`;
                 
                   
                     $.ajax({
