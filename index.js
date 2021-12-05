@@ -7,6 +7,8 @@ const PORT = process.env.PORT || 5000
 const app = express()
 
 app.use(express.static('src'))
+
+app.set('trust proxy', 1)
    
 
 app.use('/api', require('./routes'))
