@@ -12,7 +12,10 @@ app.set('trust proxy', 1)
    
 
 app.use('/api', require('./routes/index'))
+app.use('/api2', require('./routes/indexv2'))
+
 app.use('/test', require('./routes/index2'))
+app.use('/test2', require('./routes/index2v2'))
 
 app.use(cors())
 

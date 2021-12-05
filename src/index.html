@@ -7,6 +7,10 @@
 
 //import m from './urlHolder.json';
 
+//TODO-Would it be better to have all the proxy's in 1 array?
+//Or better to put them also in a .json file to call from?
+const wordcountArray = ["/api?text=", "/api2?text="];
+const charcountArray = ["/tes?text=", "/test2?text="];
 //let wordcountURL = "http://wordcount.editor.qpc.hal.davecutting.uk";
 let wordcountURL = "http://wordcountapi.40233306.qpc.hal.davecutting.uk";
 //let wordcountURL2 = urlHolder.Wordcount;
@@ -25,12 +29,12 @@ function handleErrors(response) {
 }
 
 
-function Wordcount()
+function Wordcount(i)
 {
    // fetch('./urlHolder.json')
   // .then(response => response.json())
   // .then(obj => console.log(obj))
-      
+
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -44,19 +48,29 @@ function Wordcount()
         }   
     };
     //let url = window.wordcount + "/?text=" + encodeURI(document.getElementById('content').value);
-    let url = `/api?text=${encodeURI(document.getElementById('content').value)}`;    
-    // if(handler == 0)
-  //  {
-   //     xhttp.open("GET",url);
-   //     xhttp.send();
-  //  }
-   // else{  
+    let proxyurl = wordcountArray[i];
+    let url = `${proxyurl}${encodeURI(document.getElementById('content').value)}`;  
+    if(i == 1)
+    {
+        //TODO
+        //switch this dynamically - not hard coded
+        if(wordcountArray[0] == "/api2?text=")
+        {
+            wordcountArray[1] = "/api2?text=";
+            wordcountArray[0] = "/api?text=";
+        }
+        else{
+            wordcountArray[0] = "/api2?text=";
+            wordcountArray[1] = "/api?text=";
+        }
+    }
             fetch(url)
     .then(handleErrors)
     .then(function(response) {
         xhttp.open("GET",url);
         xhttp.send();
     }).catch(function (error) {
+        Wordcount(1);
     if (error.response) {
       // The request was made and the server responded with a status code
      // console.log('1', error.message);
@@ -84,7 +98,7 @@ function Wordcount()
 
 }
 
-function Charcount()
+function Charcount(i)
 {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -97,14 +111,29 @@ function Charcount()
             }
         }
     };
-
-    let url = `/test?text=${encodeURI(document.getElementById('content').value)}`;
+    let proxyurl = charcountArray[i];
+    let url = `${proxyurl}${encodeURI(document.getElementById('content').value)}`;  
+    if(i == 1)
+    {
+        //TODO
+        //switch this dynamically - not hard coded
+        if(charcountArray[0] == "/test2?text=")
+        {
+            charcountArray[1] = "/test2?text=";
+            charcountArray[0] = "/test?text=";
+        }
+        else{
+            charcountArray[0] = "/test2?text=";
+            charcountArray[1] = "/test?text=";
+        }
+    }
     fetch(url)
     .then(handleErrors)
     .then(function(response) {
         xhttp.open("GET",url);
         xhttp.send();
     }).catch(function (error) {
+        Charcount(1);
     if (error.response) {
       // The request was made and the server responded with a status code
       console.log(error.response.data);
@@ -287,8 +316,8 @@ body  {
     </div>
     <div>
         <div class="container">
-        <button id="getData5" class="operation" onclick="Wordcount();">Word Count</button>
-        <button id="getData6" class="operation" onclick="Charcount();">Character Count</button>
+        <button id="getData5" class="operation" onclick="Wordcount(0);">Word Count</button>
+        <button id="getData6" class="operation" onclick="Charcount(0);">Character Count</button>
         <!-- <button class="operation" onclick="getURL();">Character Count</button> -->
         </div>
     </div>
@@ -600,8 +629,10 @@ body  {
     $(document).ready(function(){
 
         $("#getData5").on("click",function(){
-            
-            let url = `/api?text=${encodeURI(document.getElementById('content').value)}`;
+
+
+             let proxyurl = wordcountArray[0];
+             let url = `${proxyurl}${encodeURI(document.getElementById('content').value)}`;  
                 
                   
                     $.ajax({
@@ -703,7 +734,8 @@ body  {
             
 
            
-            let url = `/test?text=${encodeURI(document.getElementById('content').value)}`;
+            let proxyurl = charcountArray[0];
+             let url = `${proxyurl}${encodeURI(document.getElementById('content').value)}`;
             
            
                 $.ajax({
