@@ -10,8 +10,9 @@
 //TODO-Would it be better to have all the proxy's in 1 array?
 //Or better to put them also in a .json file to call from?
 const wordcountArray = ["/api?text=", "/api2?text="];
-const charcountArray = ["/tes?text=", "/test2?text="];
+const charcountArray = ["/test?text=", "/test2?text="];
 var wordLoad = 0;
+var charLoad = 0;
 //let wordcountURL = "http://wordcount.editor.qpc.hal.davecutting.uk";
 let wordcountURL = "http://wordcountapi.40233306.qpc.hal.davecutting.uk";
 //let wordcountURL2 = urlHolder.Wordcount;
@@ -144,12 +145,9 @@ function Charcount(i)
             }
         }
     };
-    let proxyurl = charcountArray[i];
-    let url = `${proxyurl}${encodeURI(document.getElementById('content').value)}`;  
-    if(i == 1)
+
+    if(i ==1)
     {
-        //TODO
-        //switch this dynamically - not hard coded
         if(charcountArray[0] == "/test2?text=")
         {
             charcountArray[1] = "/test2?text=";
@@ -159,7 +157,31 @@ function Charcount(i)
             charcountArray[0] = "/test2?text=";
             charcountArray[1] = "/test?text=";
         }
+        i = 0;
+        charLoad = charLoad + 10;
     }
+    else
+    {
+        if(charLoad >= 0)
+        {
+            charLoad--;
+        }
+        else
+        {
+            if(charcountArray[0] == "/test2?text=")
+            {
+                charcountArray[1] = "/test2?text=";
+                charcountArray[0] = "/test?text=";
+            }
+            else{
+                charcountArray[0] = "/test2?text=";
+                charcountArray[1] = "/test?text=";
+            }
+            charLoad++;
+        }
+    }
+    let proxyurl = charcountArray[i];
+    let url = `${proxyurl}${encodeURI(document.getElementById('content').value)}`;  
     fetch(url)
     .then(handleErrors)
     .then(function(response) {
@@ -768,7 +790,7 @@ body  {
 
            
             let proxyurl = charcountArray[0];
-             let url = `${proxyurl}${encodeURI(document.getElementById('content').value)}`;
+            let url = `${proxyurl}${encodeURI(document.getElementById('content').value)}`;
             
            
                 $.ajax({
