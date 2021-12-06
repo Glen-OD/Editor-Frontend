@@ -11,6 +11,7 @@
 //Or better to put them also in a .json file to call from?
 const wordcountArray = ["/api?text=", "/api2?text="];
 const charcountArray = ["/tes?text=", "/test2?text="];
+var wordLoad = 0;
 //let wordcountURL = "http://wordcount.editor.qpc.hal.davecutting.uk";
 let wordcountURL = "http://wordcountapi.40233306.qpc.hal.davecutting.uk";
 //let wordcountURL2 = urlHolder.Wordcount;
@@ -47,13 +48,12 @@ function Wordcount(i)
 
         }   
     };
-    //let url = window.wordcount + "/?text=" + encodeURI(document.getElementById('content').value);
-    let proxyurl = wordcountArray[i];
-    let url = `${proxyurl}${encodeURI(document.getElementById('content').value)}`;  
-    if(i == 1)
+
+    //check if i=1;
+    //as that means the other api is not working
+
+    if(i ==1)
     {
-        //TODO
-        //switch this dynamically - not hard coded
         if(wordcountArray[0] == "/api2?text=")
         {
             wordcountArray[1] = "/api2?text=";
@@ -63,7 +63,40 @@ function Wordcount(i)
             wordcountArray[0] = "/api2?text=";
             wordcountArray[1] = "/api?text=";
         }
+        i = 0;
+        //10 can be changed to a larger time, if we predict the other api
+        //to be down/unuseable for a larger amount of time
+        //TODO - make this more dynamic - some variable that can tell us the other
+        //api is fixed and to start load balancing again
+        wordLoad = wordLoad + 10;
     }
+    else{
+        if(wordLoad >= 0)
+        {
+            wordLoad--;
+        }
+        else
+        {
+            //TODO
+            //switch this dynamically - not hard coded
+            if(wordcountArray[0] == "/api2?text=")
+            {
+                wordcountArray[1] = "/api2?text=";
+                wordcountArray[0] = "/api?text=";
+            }
+            else{
+                wordcountArray[0] = "/api2?text=";
+                wordcountArray[1] = "/api?text=";
+            }
+            wordLoad++;
+        }
+    }
+
+        let proxyurl = wordcountArray[i];
+        let url = `${proxyurl}${encodeURI(document.getElementById('content').value)}`;
+
+    //let url = window.wordcount + "/?text=" + encodeURI(document.getElementById('content').value);  
+
             fetch(url)
     .then(handleErrors)
     .then(function(response) {
