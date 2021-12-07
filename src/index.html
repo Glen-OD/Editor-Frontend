@@ -30,6 +30,18 @@ function handleErrors(response) {
     return response;
 }
 
+function WordcountTest()
+{
+    let url = `/apiTest?text=${encodeURI(document.getElementById('content').value)}`;
+      fetch(url)
+    .then(response => response.json())
+    .then(obj => {if(true)
+    {
+        alert(obj);
+    }
+})
+}
+
 
 function Wordcount(i)
 {
@@ -377,7 +389,7 @@ body  {
         </div>
     </div>
     <div>
-        <button class="operation" onclick="init();">url getter</button>
+        <button class="operation" onclick="WordcountTest();">WordCountTester</button>
     </div>
     <div>
         <!-- <button class="operation" onclick="Vowelcount();">Vowel Count</button>
