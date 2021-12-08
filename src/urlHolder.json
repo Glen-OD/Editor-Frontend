@@ -1,8 +1,14 @@
 {
-    "wordcount": "http://wordcountapi.40233306.qpc.hal.davecutting.uk",
-    "charcount": "http://charcountapi.40233306.qpc.hal.davecutting.uk",
-    "commacount": "http://gorestapi.40233306.qpc.hal.davecutting.uk",
-    "vowelcount": "http://pythonrestapi.40233306.qpc.hal.davecutting.uk",
-    "andcount": "http://rubyrestapi.40233306.qpc.hal.davecutting.uk",
-    "wordlengthcount": "http://javarestapi.40233306.qpc.hal.davecutting.uk"
+    "wordcount": "/api?text=",
+    "wordcount2": "/api2?text=",
+    "charcount": "/char?text=",
+    "charcount2": "/char2?text=",
+    "commacount": "/comma?key=",
+    "commacount2": "/comma2?key=",
+    "vowelcount": "/vowel?x=",
+    "vowelcount2": "/vowel2?x=",
+    "andcount": "/and?x=",
+    "andcount2": "/and2?x=",
+    "wordlengthcount": "/avgword?sentence=",
+    "wordlengthcount2": "/avgword2?sentence="
 }

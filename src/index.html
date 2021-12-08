@@ -9,10 +9,14 @@
 
 //TODO-Would it be better to have all the proxy's in 1 array?
 //Or better to put them also in a .json file to call from?
-const wordcountArray = ["/api?text=", "/api2?text="];
-const charcountArray = ["/test?text=", "/test2?text="];
+//const wordcountArray = ["/api?text=", "/api2?text="];
+//const charcountArray = ["/test?text=", "/test2?text="];
 var wordLoad = 0;
 var charLoad = 0;
+var andLoad = 0;
+var commaLoad = 0;
+var vowelLoad = 0;
+var avgwordLoad = 0;
 //let wordcountURL = "http://wordcount.editor.qpc.hal.davecutting.uk";
 let wordcountURL = "http://wordcountapi.40233306.qpc.hal.davecutting.uk";
 //let wordcountURL2 = urlHolder.Wordcount;
@@ -65,48 +69,24 @@ function Wordcount(i)
     //check if i=1;
     //as that means the other api is not working
 
-    if(i ==1)
-    {
-        if(wordcountArray[0] == "/api2?text=")
-        {
-            wordcountArray[1] = "/api2?text=";
-            wordcountArray[0] = "/api?text=";
-        }
-        else{
-            wordcountArray[0] = "/api2?text=";
-            wordcountArray[1] = "/api?text=";
-        }
-        i = 0;
-        //10 can be changed to a larger time, if we predict the other api
-        //to be down/unuseable for a larger amount of time
-        //TODO - make this more dynamic - some variable that can tell us the other
-        //api is fixed and to start load balancing again
-        wordLoad = wordLoad + 10;
-    }
-    else{
-        if(wordLoad >= 0)
-        {
-            wordLoad--;
-        }
-        else
-        {
-            //TODO
-            //switch this dynamically - not hard coded
-            if(wordcountArray[0] == "/api2?text=")
-            {
-                wordcountArray[1] = "/api2?text=";
-                wordcountArray[0] = "/api?text=";
-            }
-            else{
-                wordcountArray[0] = "/api2?text=";
-                wordcountArray[1] = "/api?text=";
-            }
-            wordLoad++;
-        }
-    }
+    fetch("urlHolder.json")
+  .then(response => response.json())
+  .then(json => {if(i == 0)
+  {
+      url = "";
+      if(wordLoad > 0)
+      {
+        url = `${json.wordcount2}${encodeURI(document.getElementById('content').value)}`;
+        wordLoad--;
+      }
+      else{
+        url = `${json.wordcount}${encodeURI(document.getElementById('content').value)}`;
+        wordLoad++;
+      }
+    
+    //xhttp.open("GET",url);
+    //xhttp.send();
 
-        let proxyurl = wordcountArray[i];
-        let url = `${proxyurl}${encodeURI(document.getElementById('content').value)}`;
 
     //let url = window.wordcount + "/?text=" + encodeURI(document.getElementById('content').value);  
 
@@ -138,6 +118,19 @@ function Wordcount(i)
     //console.log(error.config);
   });
 
+    }
+    else{
+        if(wordLoad > 0)
+        {
+            wordLoad = wordLoad + 10;
+            Wordcount(0);
+        }
+        else{
+            wordLoad = wordLoad - 10;
+            Wordcount(0);
+        }
+    }})
+
    // }
         
 
@@ -158,43 +151,22 @@ function Charcount(i)
         }
     };
 
-    if(i ==1)
-    {
-        if(charcountArray[0] == "/test2?text=")
-        {
-            charcountArray[1] = "/test2?text=";
-            charcountArray[0] = "/test?text=";
-        }
-        else{
-            charcountArray[0] = "/test2?text=";
-            charcountArray[1] = "/test?text=";
-        }
-        i = 0;
-        charLoad = charLoad + 10;
-    }
-    else
-    {
-        if(charLoad >= 0)
-        {
-            charLoad--;
-        }
-        else
-        {
-            if(charcountArray[0] == "/test2?text=")
-            {
-                charcountArray[1] = "/test2?text=";
-                charcountArray[0] = "/test?text=";
-            }
-            else{
-                charcountArray[0] = "/test2?text=";
-                charcountArray[1] = "/test?text=";
-            }
-            charLoad++;
-        }
-    }
-    let proxyurl = charcountArray[i];
-    let url = `${proxyurl}${encodeURI(document.getElementById('content').value)}`;  
-    fetch(url)
+    fetch("urlHolder.json")
+  .then(response => response.json())
+  .then(json => {if(i == 0)
+  {
+      url = "";
+      if(charLoad > 0)
+      {
+        url = `${json.charcount2}${encodeURI(document.getElementById('content').value)}`;
+        charLoad--;
+      }
+      else{
+        url = `${json.charcount}${encodeURI(document.getElementById('content').value)}`;
+        charLoad++;
+      }
+    
+            fetch(url)
     .then(handleErrors)
     .then(function(response) {
         xhttp.open("GET",url);
@@ -202,23 +174,34 @@ function Charcount(i)
     }).catch(function (error) {
         Charcount(1);
     if (error.response) {
-      // The request was made and the server responded with a status code
       console.log(error.response.data);
       console.log(error.response.status);
       console.log(error.response.headers);
     } else if (error.request) {
-      // The request was made but no response was received
       console.log(error.request);
       console.log(error.response.status);
     } else {
-      // Something happened in setting up the request that triggered an Error
       console.log('Error', error.message);
       console.log('Error status 404');
     }
   });
+
+    }
+    else{
+        if(charLoad > 0)
+        {
+            charLoad = charLoad + 10;
+            Charcount(0);
+        }
+        else{
+            charLoad = charLoad - 10;
+            Charcount(0);
+        }
+    }})
+
 }
 
-function Vowelcount()
+function Vowelcount(i)
 {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -228,12 +211,56 @@ function Vowelcount()
         }
     };
 
-    let url = vowelcountURL + "/?x=" + encodeURI(document.getElementById('content').value);
-    xhttp.open("GET",url);
-    xhttp.send();
+    fetch("urlHolder.json")
+  .then(response => response.json())
+  .then(json => {if(i == 0)
+  {
+      url = "";
+      if(vowelLoad > 0)
+      {
+        url = `${json.vowelcount2}${encodeURI(document.getElementById('content').value)}`;
+        vowelLoad--;
+      }
+      else{
+        url = `${json.vowelcount}${encodeURI(document.getElementById('content').value)}`;
+        vowelLoad++;
+      }
+    
+            fetch(url)
+    .then(handleErrors)
+    .then(function(response) {
+        xhttp.open("GET",url);
+        xhttp.send();
+    }).catch(function (error) {
+        Vowelcount(1);
+    if (error.response) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      console.log(error.request);
+      console.log(error.response.status);
+    } else {
+      console.log('Error', error.message);
+      console.log('Error status 404');
+    }
+  });
+
+    }
+    else{
+        if(vowelLoad > 0)
+        {
+            vowelLoad = vowelLoad + 10;
+            Vowelcount(0);
+        }
+        else{
+            vowelLoad = vowelLoad - 10;
+            Vowelcount(0);
+        }
+    }})
 }
 
-function Commacount()
+function Commacount(i)
 {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -243,12 +270,56 @@ function Commacount()
         }
     };
 
-    let url = commacountURL + "/?key=" + encodeURI(document.getElementById('content').value);
-    xhttp.open("GET",url);
-    xhttp.send();
+    fetch("urlHolder.json")
+  .then(response => response.json())
+  .then(json => {if(i == 0)
+  {
+      url = "";
+      if(commaLoad > 0)
+      {
+        url = `${json.commacount2}${encodeURI(document.getElementById('content').value)}`;
+        commaLoad--;
+      }
+      else{
+        url = `${json.commacount}${encodeURI(document.getElementById('content').value)}`;
+        commaLoad++;
+      }
+    
+            fetch(url)
+    .then(handleErrors)
+    .then(function(response) {
+        xhttp.open("GET",url);
+        xhttp.send();
+    }).catch(function (error) {
+        Commacount(1);
+    if (error.response) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      console.log(error.request);
+      console.log(error.response.status);
+    } else {
+      console.log('Error', error.message);
+      console.log('Error status 404');
+    }
+  });
+
+    }
+    else{
+        if(commaLoad > 0)
+        {
+            commaLoad = commaLoad + 10;
+            Commacount(0);
+        }
+        else{
+            commaLoad = commaLoad - 10;
+            Commacount(0);
+        }
+    }})
 }
 
-function Andcount()
+function Andcount(i)
 {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -258,12 +329,56 @@ function Andcount()
         }
     };
 
-    let url = andcountURL + "/x=" + encodeURI(document.getElementById('content').value);
-    xhttp.open("GET",url);
-    xhttp.send();
+    fetch("urlHolder.json")
+  .then(response => response.json())
+  .then(json => {if(i == 0)
+  {
+      url = "";
+      if(andLoad > 0)
+      {
+        url = `${json.andcount2}${encodeURI(document.getElementById('content').value)}`;
+        andLoad--;
+      }
+      else{
+        url = `${json.andcount}${encodeURI(document.getElementById('content').value)}`;
+        andLoad++;
+      }
+    
+            fetch(url)
+    .then(handleErrors)
+    .then(function(response) {
+        xhttp.open("GET",url);
+        xhttp.send();
+    }).catch(function (error) {
+        Andcount(1);
+    if (error.response) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      console.log(error.request);
+      console.log(error.response.status);
+    } else {
+      console.log('Error', error.message);
+      console.log('Error status 404');
+    }
+  });
+
+    }
+    else{
+        if(andLoad > 0)
+        {
+            andLoad = andLoad + 10;
+            Andcount(0);
+        }
+        else{
+            andLoad = andLoad - 10;
+            Andcount(0);
+        }
+    }})
 }
 
-function avgwordlengthcount()
+function avgwordlengthcount(i)
 {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -273,9 +388,53 @@ function avgwordlengthcount()
         }
     };
 
-    let url = avgwordlengthURL + "/?sentence=" + encodeURI(document.getElementById('content').value);
-    xhttp.open("GET",url);
-    xhttp.send();
+    fetch("urlHolder.json")
+  .then(response => response.json())
+  .then(json => {if(i == 0)
+  {
+      url = "";
+      if(avgwordLoad > 0)
+      {
+        url = `${json.wordlengthcount2}${encodeURI(document.getElementById('content').value)}`;
+        avgwordLoad--;
+      }
+      else{
+        url = `${json.wordlengthcount}${encodeURI(document.getElementById('content').value)}`;
+        avgwordLoad++;
+      }
+    
+            fetch(url)
+    .then(handleErrors)
+    .then(function(response) {
+        xhttp.open("GET",url);
+        xhttp.send();
+    }).catch(function (error) {
+        avgwordlengthcount(1);
+    if (error.response) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      console.log(error.request);
+      console.log(error.response.status);
+    } else {
+      console.log('Error', error.message);
+      console.log('Error status 404');
+    }
+  });
+
+    }
+    else{
+        if(avgwordLoad > 0)
+        {
+            avgwordLoad = avgwordLoad + 10;
+            avgwordlengthcount(0);
+        }
+        else{
+            avgwordLoad = avgwordLoad - 10;
+            avgwordlengthcount(0);
+        }
+    }})
 }
 
 //define(['require','./urlHolder.json'], function(require) {
@@ -385,11 +544,10 @@ body  {
         <div class="container">
         <button id="getData5" class="operation" onclick="Wordcount(0);">Word Count</button>
         <button id="getData6" class="operation" onclick="Charcount(0);">Character Count</button>
-        <!-- <button class="operation" onclick="getURL();">Character Count</button> -->
         </div>
     </div>
     <div>
-        <button class="operation" onclick="WordcountTest();">WordCountTester</button>
+        <button class="operation" onclick="WordcountTest();">WordCount Monitor + Metrics</button>
     </div>
     <div>
         <!-- <button class="operation" onclick="Vowelcount();">Vowel Count</button>
@@ -397,73 +555,20 @@ body  {
     </div>
     <div>
         <div class="container">
-            <button id="getData3" class="operation">fetch data And tester</button>
-            <button id="getData4" class="operation" onclick="avgwordlengthcount();">fetch data avg word tester</button>           
+            <button id="getData3" class="operation" onclick="Andcount(0);">And Count</button>
+            <button id="getData4" class="operation" onclick="avgwordlengthcount(0);">Avg Count</button>           
         </div> 
     </div>
     <div>
         <div class="container">
-            <button id="getData" class="operation">fetch data comma tester</button>
-            <button id="getData2" class="operation">fetch data vowel tester</button>        
+            <button id="getData" class="operation" onclick="Commacount(0);">Comma Count</button>
+            <button id="getData2" class="operation" onclick="Vowelcount(0);">Vowel Count</button>        
             <div id="loader" style="margin-top: 10px; display: none;">
                 <img src="ajax-loader.gif">
             </div>      
         </div> 
     </div> 
-</div>
-<form id="jsonFile" name="jsonFile" enctype="multipart/form-data" method="post">
-
-    <fieldset>
-      <h2>Json File</h2>
-       <input type='file' id='fileinput'>
-       <input type='button' id='btnLoad' value='Load' onclick='loadFile();'>
-    </fieldset>
-  </form>
-  
-  
-  <script type="text/javascript">
-  
-    function loadFile() {
-      var input, file, fr;
-  
-      if (typeof window.FileReader !== 'function') {
-        alert("The file API isn't supported on this browser yet.");
-        return;
-      }
-  
-      input = document.getElementById('fileinput');
-      if (!input) {
-        alert("Um, couldn't find the fileinput element.");
-      }
-      else if (!input.files) {
-        alert("This browser doesn't seem to support the `files` property of file inputs.");
-      }
-      else if (!input.files[0]) {
-        alert("Please select a file before clicking 'Load'");
-      }
-      else {
-        file = input.files[0];
-        fr = new FileReader();
-        fr.onload = receivedText;
-        fr.readAsText(file);
-      }
-  
-      function receivedText(e) {
-        let lines = e.target.result;
-        var newArr = JSON.parse(lines); 
-        console.log(newArr);
-        var output = "";
-        output +=`${newArr.wordcount}`;
-        window.wordcount = output;
-
-        
-       //when the document is finished loading, replace everything
-       //between the <a ...> </a> tags with the value of splitText
-        //document.getElementById("myLink").value=newArr;
-        } 
-    }
-  
-  </script>
+</div>  
 
 <script src="jquery-3.6.0.min.js"></script>
 <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
@@ -471,19 +576,22 @@ body  {
     $(document).ready(function(){
 
         $("#getData").on("click",function(){
-            let xhttp = new XMLHttpRequest();
-                    xhttp.onreadystatechange = function() {
-                        if (this.readyState == 4 && this.status == 200) {
-                            var j = JSON.parse(this.response);
-                            document.getElementById('output').value = j.answer;
-                        }
-                    };
-                    
-                    let url2 = commacountURL + "/?key=" + encodeURI(document.getElementById('content').value);
-                    
-            $.ajax({
+            fetch("urlHolder.json")
+                .then(response => response.json())
+                .then(json => {if(true)
+                {
+                    url = "";
+                    if(commaLoad == 1 || commaLoad < 0)
+                    {
+                        url = `${json.commacount}${encodeURI(document.getElementById('content').value)}`;
+                    }
+                    else{
+                        url = `${json.commacount2}${encodeURI(document.getElementById('content').value)}`;
+                    }
+           
+                $.ajax({
                 type:"GET",
-                url:url2,
+                url:url,
                 dataType:"json",
 
                 beforeSend: function(){
@@ -495,7 +603,6 @@ body  {
                     $("#getData3").hide();
                     $("#getData5").hide();
                 },
-
 
                 complete: function(){
                     setTimeout(function(){
@@ -510,68 +617,35 @@ body  {
                 },
                 
                 success: function(data){
-                        let xhttp = new XMLHttpRequest();
-                    xhttp.onreadystatechange = function() {
-                        if (this.readyState == 4 && this.status == 200) {
-                            var j = JSON.parse(this.response);
-                            document.getElementById('output').value = j.answer;
-                        }
-                    };
-                    
-                    let url = commacountURL + "/?key=" + encodeURI(document.getElementById('content').value);
-                    
-                    xhttp.open("GET",url);
-                    xhttp.send();
-                    
-                   /*  var output = "";
-                    for(var i in data){
-                        output +=`
-                            <ul>
-                                <li>Id ${data[i].id}</li>
-                                    <li>Name ${data[i].name}</li>
-                                        <li>Username ${data[i].username}</li>
-                            </ul>
-                        `;
-                    }
-
-                     *///$("#result").html(output);
-                  //  M.toast({
-                   //     html:'Fetched successfully',
-                   //     classes:'green'
-                   // });
                 },
 
-                error: function(){
-                    $("#result").html("error failed to get data");
-                   // M.toast({
-                    //    html:'Failed to get data',
-                   //     classes:'red'
-                  // });
+                error: function(){                 
                 }
             });
-
+        }})            
         });
-
-
     });
 </script>
 <script>
     $(document).ready(function(){
 
         $("#getData2").on("click",function(){
-            let xhttp = new XMLHttpRequest();
-                    xhttp.onreadystatechange = function() {
-                        if (this.readyState == 4 && this.status == 200) {
-                            var j = JSON.parse(this.response);
-                            document.getElementById('output').value = j.answer;
-                        }
-                    };
-                    
-                    let url2 = vowelcountURL + "/?x=" + encodeURI(document.getElementById('content').value);
-
-            $.ajax({
+            fetch("urlHolder.json")
+                .then(response => response.json())
+                .then(json => {if(true)
+                {
+                    url = "";
+                    if(vowelLoad == 1 || vowelLoad < 0)
+                    {
+                        url = `${json.vowelcount}${encodeURI(document.getElementById('content').value)}`;
+                    }
+                    else{
+                        url = `${json.vowelcount2}${encodeURI(document.getElementById('content').value)}`;
+                    }
+           
+                $.ajax({
                 type:"GET",
-                url:url2,
+                url:url,
                 dataType:"json",
 
                 beforeSend: function(){
@@ -583,74 +657,6 @@ body  {
                     $("#getData3").hide();
                     $("#getData5").hide();
                 },
-
-                complete: function(){
-                    setTimeout(function(){
-                    $("#loader").hide();
-                    $("#getData2").show();
-                    $("#getData").show();
-                    $("#getData4").show();
-                    $("#getData6").show();
-                    $("#getData3").show();
-                    $("#getData5").show();
-                    },1000);
-                },
-
-                success: function(data){
-                    let xhttp = new XMLHttpRequest();
-                    xhttp.onreadystatechange = function() {
-                        if (this.readyState == 4 && this.status == 200) {
-                            var j = JSON.parse(this.response);
-                            document.getElementById('output').value = j.answer;
-                        }
-                    };
-                    
-                    let url = vowelcountURL + "/?x=" + encodeURI(document.getElementById('content').value);
-                    xhttp.open("GET",url);
-                    xhttp.send();
-                   
-                },
-
-                error: function(){
-                    $("#result").html("error failed to get data");
-                   
-                }
-            });
-
-        });
-
-
-    });
-</script>
-<script>
-    $(document).ready(function(){
-
-        $("#getData3").on("click",function(){
-            let xhttp = new XMLHttpRequest();
-                    xhttp.onreadystatechange = function() {
-                        if (this.readyState == 4 && this.status == 200) {
-                            var j = JSON.parse(this.response);
-                            document.getElementById('output').value = j.answer;
-                        }
-                    };
-                    
-                    let url2 = andcountURL + "/x=" + encodeURI(document.getElementById('content').value);
-                    
-            $.ajax({
-                type:"GET",
-                url:url2,
-                dataType:"json",
-
-                beforeSend: function(){
-                    $("#loader").show();
-                    $("#getData2").hide();
-                    $("#getData").hide();
-                    $("#getData4").hide();
-                    $("#getData6").hide();
-                    $("#getData3").hide();
-                    $("#getData5").hide();
-                },
-
 
                 complete: function(){
                     setTimeout(function(){
@@ -665,31 +671,67 @@ body  {
                 },
                 
                 success: function(data){
-                        let xhttp = new XMLHttpRequest();
-                    xhttp.onreadystatechange = function() {
-                        if (this.readyState == 4 && this.status == 200) {
-                            var j = JSON.parse(this.response);
-                            document.getElementById('output').value = j.answer;
-                        }
-                    };
-                    
-                    let url = andcountURL + "/x=" + encodeURI(document.getElementById('content').value);
-                    
-                    xhttp.open("GET",url);
-                    xhttp.send();
-                    
-                   
                 },
 
-                error: function(){
-                    $("#result").html("error failed to get data");
-                   
+                error: function(){                 
                 }
             });
-
+        }})            
         });
+    });
+</script>
+<script>
+    $(document).ready(function(){
 
+        $("#getData3").on("click",function(){
+            fetch("urlHolder.json")
+                .then(response => response.json())
+                .then(json => {if(true)
+                {
+                    url = "";
+                    if(andLoad == 1 || andLoad < 0)
+                    {
+                        url = `${json.andcount}${encodeURI(document.getElementById('content').value)}`;
+                    }
+                    else{
+                        url = `${json.andcount2}${encodeURI(document.getElementById('content').value)}`;
+                    }
+           
+                $.ajax({
+                type:"GET",
+                url:url,
+                dataType:"json",
 
+                beforeSend: function(){
+                    $("#loader").show();
+                    $("#getData2").hide();
+                    $("#getData").hide();
+                    $("#getData4").hide();
+                    $("#getData6").hide();
+                    $("#getData3").hide();
+                    $("#getData5").hide();
+                },
+
+                complete: function(){
+                    setTimeout(function(){
+                    $("#loader").hide();
+                    $("#getData2").show();
+                    $("#getData").show();
+                    $("#getData4").show();
+                    $("#getData6").show();
+                    $("#getData3").show();
+                    $("#getData5").show();
+                    },1000);
+                },
+                
+                success: function(data){
+                },
+
+                error: function(){                 
+                }
+            });
+        }})            
+        });
     });
 </script>
 <script>
@@ -697,10 +739,19 @@ body  {
 
         $("#getData5").on("click",function(){
 
-
-             let proxyurl = wordcountArray[0];
-             let url = `${proxyurl}${encodeURI(document.getElementById('content').value)}`;  
-                
+            fetch("urlHolder.json")
+                .then(response => response.json())
+                .then(json => {if(true)
+                {
+                    url = "";
+                    if(wordLoad == 1 || wordLoad < 0)
+                    {
+                        url = `${json.wordcount}${encodeURI(document.getElementById('content').value)}`;
+                    }
+                    else{
+                        url = `${json.wordcount2}${encodeURI(document.getElementById('content').value)}`;
+                    }
+                                
                   
                     $.ajax({
                     type:"GET",
@@ -740,6 +791,7 @@ body  {
                     
                     }
                     });
+                }})
 
         });
 
@@ -752,58 +804,82 @@ body  {
         $("#getData4").on("click",function(){
     
 
-            let url = avgwordlengthURL + "/?sentence=" + encodeURI(document.getElementById('content').value);
+            fetch("urlHolder.json")
+                .then(response => response.json())
+                .then(json => {if(true)
+                {
+                    url = "";
+                    if(avgwordLoad == 1 || avgwordLoad < 0)
+                    {
+                        url = `${json.wordlengthcount}${encodeURI(document.getElementById('content').value)}`;
+                    }
+                    else{
+                        url = `${json.wordlengthcount2}${encodeURI(document.getElementById('content').value)}`;
+                    }
+                                
+                  
+                    $.ajax({
+                    type:"GET",
+                    url:url,
+                    dataType:"json",
+
+                    beforeSend: function(){
+                        $("#loader").show();
+                        $("#getData2").hide();
+                        $("#getData").hide();
+                        $("#getData4").hide();
+                        $("#getData6").hide();
+                        $("#getData3").hide();
+                        $("#getData5").hide();
+                    },
+
+
+                    complete: function(){
+                        setTimeout(function(){
+                        $("#loader").hide();
+                        $("#getData2").show();
+                        $("#getData").show();
+                        $("#getData4").show();
+                        $("#getData6").show();
+                        $("#getData3").show();
+                        $("#getData5").show();
+                        },1000);
+                    },
+                    
+                    success: function(data){
+                            
+
             
-                       
-            $.ajax({
-            type:"GET",
-            url:url,
-            dataType:"json",
+                    },
 
-            beforeSend: function(){
-                $("#loader").show();
-                $("#getData2").hide();
-                $("#getData").hide();
-                $("#getData4").hide();
-                $("#getData6").hide();
-                $("#getData3").hide();
-                $("#getData5").hide();
-            },
+                    error: function(){
+                    
+                    }
+                    });
+                }})
 
-            complete: function(){
-                setTimeout(function(){
-                $("#loader").hide();
-                $("#getData2").show();
-                $("#getData").show();
-                $("#getData4").show();
-                $("#getData6").show();
-                $("#getData3").show();
-                $("#getData5").show();
-                },1000);
-            },
-            
-            success: function(data){
-            },
-
-            error: function(){
-            }
         });
 
+
     });
-
-
-});
 </script>
 <script>
     $(document).ready(function(){
 
         $("#getData6").on("click",function(){
-            
-
-           
-            let proxyurl = charcountArray[0];
-            let url = `${proxyurl}${encodeURI(document.getElementById('content').value)}`;
-            
+             
+            fetch("urlHolder.json")
+                .then(response => response.json())
+                .then(json => {if(true)
+                {
+                    url = "";
+                    if(charLoad == 1 || charLoad < 0)
+                    {
+                        url = `${json.charcount}${encodeURI(document.getElementById('content').value)}`;
+                    }
+                    else{
+                        url = `${json.charcount2}${encodeURI(document.getElementById('content').value)}`;
+                    }
            
                 $.ajax({
                 type:"GET",
@@ -820,7 +896,6 @@ body  {
                     $("#getData5").hide();
                 },
 
-
                 complete: function(){
                     setTimeout(function(){
                     $("#loader").hide();
@@ -834,20 +909,13 @@ body  {
                 },
                 
                 success: function(data){
-                        
-
-        
                 },
 
-                error: function(){
-                   
+                error: function(){                 
                 }
             });
-                 
-
+        }})            
         });
-
-
     });
 </script> 
 </body>
