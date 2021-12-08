@@ -18,14 +18,14 @@ var commaLoad = 0;
 var vowelLoad = 0;
 var avgwordLoad = 0;
 //let wordcountURL = "http://wordcount.editor.qpc.hal.davecutting.uk";
-let wordcountURL = "http://wordcountapi.40233306.qpc.hal.davecutting.uk";
+//let wordcountURL = "http://wordcountapi.40233306.qpc.hal.davecutting.uk";
 //let wordcountURL2 = urlHolder.Wordcount;
 //let charcountURL = "http://charcount.editor.qpc.hal.davecutting.uk";
-let charcountURL = "http://charcountapi.40233306.qpc.hal.davecutting.uk";
-let commacountURL = "http://gorestapi.40233306.qpc.hal.davecutting.uk";
-let vowelcountURL = "http://pythonrestapi.40233306.qpc.hal.davecutting.uk";
-let andcountURL = "http://rubyrestapi.40233306.qpc.hal.davecutting.uk";
-let avgwordlengthURL = "http://javarestapi.40233306.qpc.hal.davecutting.uk";
+//let charcountURL = "http://charcountapi.40233306.qpc.hal.davecutting.uk";
+//let commacountURL = "http://gorestapi.40233306.qpc.hal.davecutting.uk";
+//let vowelcountURL = "http://pythonrestapi.40233306.qpc.hal.davecutting.uk";
+//let andcountURL = "http://rubyrestapi.40233306.qpc.hal.davecutting.uk";
+//let avgwordlengthURL = "http://javarestapi.40233306.qpc.hal.davecutting.uk";
 
 function handleErrors(response) {
     if (!response.ok) {
@@ -36,14 +36,158 @@ function handleErrors(response) {
 
 function WordcountTest()
 {
-    let url = `/apiTest?text=${encodeURI(document.getElementById('content').value)}`;
-      fetch(url)
-    .then(response => response.json())
-    .then(obj => {if(true)
+    fetch("urlTesterHolder.json")
+  .then(response => response.json())
+  .then(json => {if(true)
     {
-        alert(obj);
+        url = `${json.wordcount}${encodeURI(document.getElementById('content').value)}`;
+            fetch(url)
+        .then(response => response.json())
+        .then(obj => {if(true)
+        {
+            alert(obj);
+        }
+        })
+        url = `${json.wordcount2}${encodeURI(document.getElementById('content').value)}`;
+            fetch(url)
+        .then(response => response.json())
+        .then(obj => {if(true)
+        {
+            alert(obj);
+        }
+        })
     }
-})
+    })    
+}
+
+function CharcountTest()
+{
+    fetch("urlTesterHolder.json")
+  .then(response => response.json())
+  .then(json => {if(true)
+    {
+        url = `${json.charcount}${encodeURI(document.getElementById('content').value)}`;
+            fetch(url)
+        .then(response => response.json())
+        .then(obj => {if(true)
+        {
+            alert(obj);
+        }
+        })
+        url = `${json.charcount2}${encodeURI(document.getElementById('content').value)}`;
+            fetch(url)
+        .then(response => response.json())
+        .then(obj => {if(true)
+        {
+            alert(obj);
+        }
+        })
+    }
+    })    
+}
+
+function CommacountTest()
+{
+    fetch("urlTesterHolder.json")
+  .then(response => response.json())
+  .then(json => {if(true)
+    {
+        url = `${json.commacount}${encodeURI(document.getElementById('content').value)}`;
+            fetch(url)
+        .then(response => response.json())
+        .then(obj => {if(true)
+        {
+            alert(obj);
+        }
+        })
+        url = `${json.commacount2}${encodeURI(document.getElementById('content').value)}`;
+            fetch(url)
+        .then(response => response.json())
+        .then(obj => {if(true)
+        {
+            alert(obj);
+        }
+        })
+    }
+    })    
+}
+
+function VowelcountTest()
+{
+    fetch("urlTesterHolder.json")
+  .then(response => response.json())
+  .then(json => {if(true)
+    {
+        url = `${json.vowelcount}${encodeURI(document.getElementById('content').value)}`;
+            fetch(url)
+        .then(response => response.json())
+        .then(obj => {if(true)
+        {
+            alert(obj);
+        }
+        })
+        url = `${json.vowelcount2}${encodeURI(document.getElementById('content').value)}`;
+            fetch(url)
+        .then(response => response.json())
+        .then(obj => {if(true)
+        {
+            alert(obj);
+        }
+        })
+    }
+    })    
+}
+
+function AndcountTest()
+{
+    fetch("urlTesterHolder.json")
+  .then(response => response.json())
+  .then(json => {if(true)
+    {
+        url = `${json.andcount}${encodeURI(document.getElementById('content').value)}`;
+            fetch(url)
+        .then(response => response.json())
+        .then(obj => {if(true)
+        {
+            alert(obj);
+        }
+        })
+        url = `${json.andcount2}${encodeURI(document.getElementById('content').value)}`;
+            fetch(url)
+        .then(response => response.json())
+        .then(obj => {if(true)
+        {
+            alert(obj);
+        }
+        })
+    }
+    })    
+}
+
+function AvgcountTest()
+{
+    fetch("urlTesterHolder.json")
+  .then(response => response.json())
+  .then(json => {if(true)
+    {
+        url = `${json.wordlengthcount}${encodeURI(document.getElementById('content').value)}`;
+            fetch(url)
+        .then(response => response.json())
+        .then(obj => {if(true)
+        {
+            alert(obj);
+        }
+        })
+        url = `${json.wordlengthcount2}${encodeURI(document.getElementById('content').value)}`;
+            fetch(url)
+        .then(response => response.json())
+        .then(obj => {if(true)
+        {
+            alert(obj);
+        }
+        })
+    }
+    })    
 }
 
 
@@ -547,9 +691,6 @@ body  {
         </div>
     </div>
     <div>
-        <button class="operation" onclick="WordcountTest();">WordCount Monitor + Metrics</button>
-    </div>
-    <div>
         <!-- <button class="operation" onclick="Vowelcount();">Vowel Count</button>
         <button class="operation" onclick="Commacount()">Comma Count</button> -->
     </div>
@@ -567,6 +708,14 @@ body  {
                 <img src="ajax-loader.gif">
             </div>      
         </div> 
+    </div>
+    <div>
+        <button class="operation" onclick="WordcountTest();">WordCount Monitor + Metrics</button>
+        <button class="operation" onclick="CharcountTest();">CharCount Monitor + Metrics</button>
+        <button class="operation" onclick="CommacountTest();">CommaCount Monitor + Metrics</button>
+        <button class="operation" onclick="VowelcountTest();">VowelCount Monitor + Metrics</button>
+        <button class="operation" onclick="AndcountTest();">AndCount Monitor + Metrics</button>
+        <button class="operation" onclick="AvgcountTest();">AvgCount Monitor + Metrics</button>
     </div> 
 </div>  
 
