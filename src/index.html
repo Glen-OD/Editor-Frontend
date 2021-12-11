@@ -581,6 +581,30 @@ function avgwordlengthcount(i)
     }})
 }
 
+
+async function tester() {
+    const textfromclient = document.getElementById('content').value;
+
+    const data = {textfromclient};
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    };
+    const response = await fetch('tester', options);
+    const json = await response.json();
+    console.log(json);
+
+}
+
+async function getTester() {
+    const response = await fetch('/getTester');
+    const data = await response.json();
+    console.log(data);
+}
+
 //define(['require','./urlHolder.json'], function(require) {
 //    
 //    var json = require('./urlHolder.json');
@@ -691,6 +715,8 @@ body  {
         </div>
     </div>
     <div>
+        <button class="operation" onclick="tester();">Test</button>
+        <button class="operation" onclick="getTester();">getTest</button>
         <!-- <button class="operation" onclick="Vowelcount();">Vowel Count</button>
         <button class="operation" onclick="Commacount()">Comma Count</button> -->
     </div>
