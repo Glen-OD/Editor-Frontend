@@ -10,6 +10,5 @@
     "andcount": "/and?x=",
     "andcount2": "/and2?x=",
     "wordlengthcount": "/avgword?sentence=",
-    "wordlengthcount2": "/avgword2?sentence=",
-    "postTest": "/tester?"
+    "wordlengthcount2": "/avgword2?sentence="
 }
