@@ -17,6 +17,7 @@ var andLoad = 0;
 var commaLoad = 0;
 var vowelLoad = 0;
 var avgwordLoad = 0;
+var wordERROR = 0;
 //let wordcountURL = "http://wordcount.editor.qpc.hal.davecutting.uk";
 //let wordcountURL = "http://wordcountapi.40233306.qpc.hal.davecutting.uk";
 //let wordcountURL2 = urlHolder.Wordcount;
@@ -197,6 +198,9 @@ function Wordcount(i)
   // .then(response => response.json())
   // .then(obj => console.log(obj))
 
+  if(wordERROR < 2)
+  {
+
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -240,6 +244,8 @@ function Wordcount(i)
         xhttp.open("GET",url);
         xhttp.send();
     }).catch(function (error) {
+        alert("Error on wordcount - Switching url: attempt " + (wordERROR+1));
+        wordERROR = wordERROR + 1;
         Wordcount(1);
     if (error.response) {
       // The request was made and the server responded with a status code
@@ -274,6 +280,12 @@ function Wordcount(i)
             Wordcount(0);
         }
     }})
+    }
+    else{
+        alert("Wordcount out of use. Number of attempts " + wordERROR + ": MAX TRIES USED");
+        return;
+    }
+
 
    // }
         
@@ -949,12 +961,17 @@ body  {
                 .then(json => {if(true)
                 {
                     url = "";
+                    if(wordERROR < 2){
                     if(wordLoad == 1 || wordLoad < 0)
                     {
                         url = `${json.wordcount}${encodeURI(document.getElementById('content').value)}`;
                     }
                     else{
                         url = `${json.wordcount2}${encodeURI(document.getElementById('content').value)}`;
+                    }
+                    }
+                    else{
+                        url = '/';
                     }
                                 
                   

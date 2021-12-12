@@ -1,6 +1,6 @@
 {
-    "wordcount": "/api?text=",
-    "wordcount2": "/api2?text=",
+    "wordcount": "/ai?text=",
+    "wordcount2": "/ai2?text=",
     "charcount": "/char?text=",
     "charcount2": "/char2?text=",
     "commacount": "/comma?key=",
