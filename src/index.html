@@ -971,7 +971,7 @@ body  {
                 .then(json => {if(true)
                 {
                     url = "";
-                    if(andERROR){
+                    if(andERROR < 2){
                     if(andLoad == 1 || andLoad < 0)
                     {
                         url = `${json.andcount}${encodeURI(document.getElementById('content').value)}`;
