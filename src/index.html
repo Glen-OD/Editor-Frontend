@@ -11,13 +11,21 @@
 //Or better to put them also in a .json file to call from?
 //const wordcountArray = ["/api?text=", "/api2?text="];
 //const charcountArray = ["/test?text=", "/test2?text="];
+
 var wordLoad = 0;
 var charLoad = 0;
 var andLoad = 0;
 var commaLoad = 0;
 var vowelLoad = 0;
 var avgwordLoad = 0;
+
 var wordERROR = 0;
+var charERROR = 0;
+var andERROR = 0;
+var commaERROR = 0;
+var vowelERROR = 0;
+var avgERROR = 0;
+
 //let wordcountURL = "http://wordcount.editor.qpc.hal.davecutting.uk";
 //let wordcountURL = "http://wordcountapi.40233306.qpc.hal.davecutting.uk";
 //let wordcountURL2 = urlHolder.Wordcount;
@@ -295,6 +303,10 @@ function Wordcount(i)
 
 function Charcount(i)
 {
+
+
+    if(charERROR < 2)
+    {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -328,6 +340,8 @@ function Charcount(i)
         xhttp.open("GET",url);
         xhttp.send();
     }).catch(function (error) {
+        alert("Error on charcount - Switching url: attempt: " + (charERROR+1));
+        charERROR++;
         Charcount(1);
     if (error.response) {
       console.log(error.response.data);
@@ -354,11 +368,18 @@ function Charcount(i)
             Charcount(0);
         }
     }})
+    }
+    else{
+        alert("Charcount out of use. Number of attempts " + charERROR + ": MAX TRIES USED");
+        return;
+    }
 
 }
 
 function Vowelcount(i)
 {
+    if(vowelERROR < 2)
+    {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -388,6 +409,8 @@ function Vowelcount(i)
         xhttp.open("GET",url);
         xhttp.send();
     }).catch(function (error) {
+        alert("Error on vowelcount - Switching url: attempt " + (vowelERROR+1));
+        vowelERROR++;
         Vowelcount(1);
     if (error.response) {
       console.log(error.response.data);
@@ -414,10 +437,17 @@ function Vowelcount(i)
             Vowelcount(0);
         }
     }})
+    }
+    else{
+        alert("Vowelcount out of use. Number of attempts " + vowelERROR + ": MAX TRIES USED");
+        return;
+    }
 }
 
 function Commacount(i)
 {
+    if(commaERROR < 2)
+    {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -447,6 +477,8 @@ function Commacount(i)
         xhttp.open("GET",url);
         xhttp.send();
     }).catch(function (error) {
+        alert("Error on commacount - Switching url: attempt " + (commaERROR+1));
+        commaERROR = commaERROR + 1;
         Commacount(1);
     if (error.response) {
       console.log(error.response.data);
@@ -473,10 +505,17 @@ function Commacount(i)
             Commacount(0);
         }
     }})
+    }
+    else{
+        alert("Commacount out of use. Number of attempts " + commaERROR + ": MAX TRIES USED");
+        return;
+    }
 }
 
 function Andcount(i)
 {
+    if(andERROR)
+    {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -506,6 +545,8 @@ function Andcount(i)
         xhttp.open("GET",url);
         xhttp.send();
     }).catch(function (error) {
+        alert("Error on andcount - Switching url: attempt " + (andERROR+1));
+        andERROR = andERROR + 1;
         Andcount(1);
     if (error.response) {
       console.log(error.response.data);
@@ -532,10 +573,17 @@ function Andcount(i)
             Andcount(0);
         }
     }})
+    }
+    else{
+        alert("andcount out of use. Number of attempts " + andERROR + ": MAX TRIES USED");
+        return;
+    }
 }
 
 function avgwordlengthcount(i)
 {
+    if(avgERROR < 2)
+    {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -565,6 +613,8 @@ function avgwordlengthcount(i)
         xhttp.open("GET",url);
         xhttp.send();
     }).catch(function (error) {
+        alert("Error on avgcount - Switching url: attempt " + (avgERROR+1));
+        avgERROR = avgERROR + 1;
         avgwordlengthcount(1);
     if (error.response) {
       console.log(error.response.data);
@@ -591,6 +641,11 @@ function avgwordlengthcount(i)
             avgwordlengthcount(0);
         }
     }})
+    }
+    else{
+        alert("Avgcount out of use. Number of attempts " + avgERROR + ": MAX TRIES USED");
+        return;
+    }
 }
 
 
@@ -798,6 +853,7 @@ body  {
                 .then(json => {if(true)
                 {
                     url = "";
+                    if(commaERROR < 2){
                     if(commaLoad == 1 || commaLoad < 0)
                     {
                         url = `${json.commacount}${encodeURI(document.getElementById('content').value)}`;
@@ -805,6 +861,10 @@ body  {
                     else{
                         url = `${json.commacount2}${encodeURI(document.getElementById('content').value)}`;
                     }
+                }
+                else{
+                    url = '/';
+                }
            
                 $.ajax({
                 type:"GET",
@@ -852,6 +912,7 @@ body  {
                 .then(json => {if(true)
                 {
                     url = "";
+                    if(vowelERROR){
                     if(vowelLoad == 1 || vowelLoad < 0)
                     {
                         url = `${json.vowelcount}${encodeURI(document.getElementById('content').value)}`;
@@ -859,6 +920,10 @@ body  {
                     else{
                         url = `${json.vowelcount2}${encodeURI(document.getElementById('content').value)}`;
                     }
+                }
+                else{
+                    url = '/';
+                }
            
                 $.ajax({
                 type:"GET",
@@ -906,6 +971,7 @@ body  {
                 .then(json => {if(true)
                 {
                     url = "";
+                    if(andERROR){
                     if(andLoad == 1 || andLoad < 0)
                     {
                         url = `${json.andcount}${encodeURI(document.getElementById('content').value)}`;
@@ -913,6 +979,10 @@ body  {
                     else{
                         url = `${json.andcount2}${encodeURI(document.getElementById('content').value)}`;
                     }
+                }
+                else{
+                    url = '/';
+                }
            
                 $.ajax({
                 type:"GET",
@@ -1031,6 +1101,7 @@ body  {
                 .then(json => {if(true)
                 {
                     url = "";
+                    if(avgERROR < 2){
                     if(avgwordLoad == 1 || avgwordLoad < 0)
                     {
                         url = `${json.wordlengthcount}${encodeURI(document.getElementById('content').value)}`;
@@ -1038,6 +1109,10 @@ body  {
                     else{
                         url = `${json.wordlengthcount2}${encodeURI(document.getElementById('content').value)}`;
                     }
+                }
+                else{
+                    url = '/';
+                }
                                 
                   
                     $.ajax({
@@ -1095,6 +1170,7 @@ body  {
                 .then(json => {if(true)
                 {
                     url = "";
+                    if(charERROR < 2){
                     if(charLoad == 1 || charLoad < 0)
                     {
                         url = `${json.charcount}${encodeURI(document.getElementById('content').value)}`;
@@ -1102,6 +1178,10 @@ body  {
                     else{
                         url = `${json.charcount2}${encodeURI(document.getElementById('content').value)}`;
                     }
+                }
+                else{
+                    url = '/';
+                }
            
                 $.ajax({
                 type:"GET",
