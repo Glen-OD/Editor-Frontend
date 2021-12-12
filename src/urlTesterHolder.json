@@ -1,14 +1,14 @@
 {
-    "wordcount": "/apiTest?text=",
-    "wordcount2": "/api2Test?text=",
-    "charcount": "/charTest?text=",
-    "charcount2": "/charTest2?text=",
-    "commacount": "/commaTest?key=",
-    "commacount2": "/commaTest2?key=",
-    "vowelcount": "/vowelTest?x=",
-    "vowelcount2": "/vowelTest2?x=",
-    "andcount": "/andTest?x=",
-    "andcount2": "/andTest2?x=",
-    "wordlengthcount": "/avgwordTest?sentence=",
-    "wordlengthcount2": "/avgwordTest2?sentence="
+    "wordcount": "http://glenmonitormetricsapi.40233306.qpc.hal.davecutting.uk/apiTest?text=",
+    "wordcount2": "http://glenmonitormetricsapi.40233306.qpc.hal.davecutting.uk/api2Test?text=",
+    "charcount": "http://glenmonitormetricsapi.40233306.qpc.hal.davecutting.uk/charTest?text=",
+    "charcount2": "http://glenmonitormetricsapi.40233306.qpc.hal.davecutting.uk/charTest2?text=",
+    "commacount": "http://glenmonitormetricsapi.40233306.qpc.hal.davecutting.uk/commaTest?key=",
+    "commacount2": "http://glenmonitormetricsapi.40233306.qpc.hal.davecutting.uk/commaTest2?key=",
+    "vowelcount": "http://glenmonitormetricsapi.40233306.qpc.hal.davecutting.uk/vowelTest?x=",
+    "vowelcount2": "http://glenmonitormetricsapi.40233306.qpc.hal.davecutting.uk/vowelTest2?x=",
+    "andcount": "http://glenmonitormetricsapi.40233306.qpc.hal.davecutting.uk/andTest?x=",
+    "andcount2": "http://glenmonitormetricsapi.40233306.qpc.hal.davecutting.uk/andTest2?x=",
+    "wordlengthcount": "http://glenmonitormetricsapi.40233306.qpc.hal.davecutting.uk/avgwordTest?sentence=",
+    "wordlengthcount2": "http://glenmonitormetricsapi.40233306.qpc.hal.davecutting.uk/avgwordTest2?sentence="
 }
