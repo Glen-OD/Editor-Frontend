@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 5000
 
 const Datastore = require('nedb');
 const { response } = require('express');
+const req = require('express/lib/request');
 
 //const pathToData = path.resolve(__dirname, "db/db")
 //const db = new Datastore({ filename: pathToData});
@@ -50,16 +51,34 @@ app.post("/api", (req, res) => {
 
 
 app.post('/tester', (request, response) => {
-    console.log('I got a request');
+    console.log('Saving text + giving out id');
     const data = request.body;
     database.insert(data);
+    //console.log('------------------');
+    //console.log(request.body);
+    //console.log('------------------');
+    //console.log(request.body.textfromclient);
+    //console.log('------------------');
+    database.find({textfromclient: `${request.body.textfromclient}`}, (err, spData) => {
+        if(err) {
+            console.log("Error: + " + request.body);
+            response.end();
+            return;
+        }
+        //console.log("we are in");
+        //console.log(spData);
+        response.json(spData);
+    })
     //console.log(database);
-    response.json(data);
+    //response.json(data);
 });
 
-app.get('/getTester', (request, response) => {
-    database.find({}, (err, data) => {
+app.post('/getTester', (request, response) => {
+    console.log("taking in id + giving out text");
+    //console.log(request.body);
+    database.find({_id: `${request.body._id}`}, (err, data) => {
         if(err) {
+            console.log("Error: + " + request.body);
             response.end();
             return;
         }

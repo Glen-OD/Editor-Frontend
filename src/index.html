@@ -593,16 +593,46 @@ async function tester() {
         },
         body: JSON.stringify(data)
     };
-    const response = await fetch('tester', options);
+    const response = await fetch('/tester', options);
     const json = await response.json();
-    console.log(json);
+    
+    for (item of json){
+        idOfJson = `${item._id}`;
+        alert("here is your id " + idOfJson);
+        return;
+    }
 
 }
 
 async function getTester() {
-    const response = await fetch('/getTester');
-    const data = await response.json();
-    console.log(data);
+    const _id = document.getElementById('content').value;
+
+    const data = {_id};
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    };
+    const response = await fetch('/getTester', options);
+    const json = await response.json();
+    
+    for (item of json){
+        textOfJson = `${item.textfromclient}`;
+        
+        
+        document.getElementById('content').value = textOfJson;
+        return;
+        //console.log(textOfJson);
+    }
+    
+    
+    
+    
+    //const response = await fetch('/getTester');
+    //const data = await response.json();
+    //console.log(data);
 }
 
 //define(['require','./urlHolder.json'], function(require) {
