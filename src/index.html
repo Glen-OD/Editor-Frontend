@@ -912,7 +912,7 @@ body  {
                 .then(json => {if(true)
                 {
                     url = "";
-                    if(vowelERROR){
+                    if(vowelERROR < 2){
                     if(vowelLoad == 1 || vowelLoad < 0)
                     {
                         url = `${json.vowelcount}${encodeURI(document.getElementById('content').value)}`;
