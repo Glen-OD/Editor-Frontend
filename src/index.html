@@ -43,6 +43,40 @@ function handleErrors(response) {
     return response;
 }
 
+async function getMono(i) {
+    const data = {};
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    };
+    const response = await fetch(`${i}`, options);
+    const json = await response.json();
+    
+    for (item of json){
+        textOfJson = `${item.obj}`;
+
+        console.log(textOfJson);
+    } 
+    //const response = await fetch('/getTester');
+    //const data = await response.json();
+    //console.log(data);
+}
+
+function getMetricsDatabase()
+{
+    fetch("urlTesterHolder.json")
+  .then(response => response.json())
+  .then(json => {if(true)
+    {
+        myjson = json.getMetrics;
+        getMono(myjson);       
+    }
+    })    
+}
+
 
 function WordcountTest()
 {
@@ -960,6 +994,7 @@ body  {
         <button id="getData10" class="operation" onclick="VowelcountTest();">VowelCount Monitor + Metrics</button>
         <button id="getData11" class="operation" onclick="AndcountTest();">AndCount Monitor + Metrics</button>
         <button id="getData12" class="operation" onclick="AvgcountTest();">AvgCount Monitor + Metrics</button>
+        <button id="getData15" class="operation" onclick="getMetricsDatabase();">Console Log the Metrics Database</button>
     </div> 
 </div>  
 
@@ -1008,6 +1043,7 @@ body  {
                     $("#getData12").hide();
                     $("#getData13").hide();
                     $("#getData14").hide();
+                    $("#getData15").hide();
                 },
 
                 complete: function(){
@@ -1027,6 +1063,7 @@ body  {
                     $("#getData12").show();
                     $("#getData13").show();
                     $("#getData14").show();
+                    $("#getData15").show();
                     },1000);
                 },
                 
@@ -1083,6 +1120,7 @@ body  {
                     $("#getData12").hide();
                     $("#getData13").hide();
                     $("#getData14").hide();
+                    $("#getData15").hide();
                 },
 
                 complete: function(){
@@ -1102,6 +1140,7 @@ body  {
                     $("#getData12").show();
                     $("#getData13").show();
                     $("#getData14").show();
+                    $("#getData15").show();
                     },1000);
                 },
                 
@@ -1158,6 +1197,7 @@ body  {
                     $("#getData12").hide();
                     $("#getData13").hide();
                     $("#getData14").hide();
+                    $("#getData15").hide();
                 },
 
                 complete: function(){
@@ -1177,6 +1217,7 @@ body  {
                     $("#getData12").show();
                     $("#getData13").show();
                     $("#getData14").show();
+                    $("#getData15").show();
                     },1000);
                 },
                 
@@ -1235,6 +1276,7 @@ body  {
                     $("#getData12").hide();
                     $("#getData13").hide();
                     $("#getData14").hide();
+                    $("#getData15").hide();
                 },
 
                 complete: function(){
@@ -1254,6 +1296,7 @@ body  {
                     $("#getData12").show();
                     $("#getData13").show();
                     $("#getData14").show();
+                    $("#getData15").show();
                     },1000);
                 },
                     
@@ -1320,6 +1363,7 @@ body  {
                     $("#getData12").hide();
                     $("#getData13").hide();
                     $("#getData14").hide();
+                    $("#getData15").hide();
                 },
 
                 complete: function(){
@@ -1339,6 +1383,7 @@ body  {
                     $("#getData12").show();
                     $("#getData13").show();
                     $("#getData14").show();
+                    $("#getData15").show();   
                     },1000);
                 },
                     
@@ -1403,6 +1448,7 @@ body  {
                     $("#getData12").hide();
                     $("#getData13").hide();
                     $("#getData14").hide();
+                    $("#getData15").hide();
                 },
 
                 complete: function(){
@@ -1422,6 +1468,7 @@ body  {
                     $("#getData12").show();
                     $("#getData13").show();
                     $("#getData14").show();
+                    $("#getData15").show();
                     },1000);
                 },
                 
@@ -1462,6 +1509,7 @@ body  {
                     $("#getData12").hide();
                     $("#getData13").hide();
                     $("#getData14").hide();
+                    $("#getData15").hide();
                 },
 
                 complete: function(){
@@ -1481,6 +1529,7 @@ body  {
                     $("#getData12").show();
                     $("#getData13").show();
                     $("#getData14").show();
+                    $("#getData15").show();
                     },1000);
                 },
                 
@@ -1521,6 +1570,7 @@ body  {
                     $("#getData12").hide();
                     $("#getData13").hide();
                     $("#getData14").hide();
+                    $("#getData15").hide();
                 },
 
                 complete: function(){
@@ -1540,6 +1590,7 @@ body  {
                     $("#getData12").show();
                     $("#getData13").show();
                     $("#getData14").show();
+                    $("#getData15").show();
                     },1000);
                 },
                 
@@ -1580,6 +1631,7 @@ body  {
                     $("#getData12").hide();
                     $("#getData13").hide();
                     $("#getData14").hide();
+                    $("#getData15").hide();
                 },
 
                 complete: function(){
@@ -1599,6 +1651,7 @@ body  {
                     $("#getData12").show();
                     $("#getData13").show();
                     $("#getData14").show();
+                    $("#getData15").show();
                     },1000);
                 },
                 
@@ -1639,6 +1692,7 @@ body  {
                     $("#getData12").hide();
                     $("#getData13").hide();
                     $("#getData14").hide();
+                    $("#getData15").hide();
                 },
 
                 complete: function(){
@@ -1658,6 +1712,7 @@ body  {
                     $("#getData12").show();
                     $("#getData13").show();
                     $("#getData14").show();
+                    $("#getData15").show();
                     },1000);
                 },
                 
@@ -1698,6 +1753,7 @@ body  {
                     $("#getData12").hide();
                     $("#getData13").hide();
                     $("#getData14").hide();
+                    $("#getData15").hide();
                 },
 
                 complete: function(){
@@ -1717,6 +1773,7 @@ body  {
                     $("#getData12").show();
                     $("#getData13").show();
                     $("#getData14").show();
+                    $("#getData15").show();
                     },1000);
                 },
                 
@@ -1758,6 +1815,7 @@ body  {
                     $("#getData12").hide();
                     $("#getData13").hide();
                     $("#getData14").hide();
+                    $("#getData15").hide();
                 },
 
                 complete: function(){
@@ -1777,6 +1835,7 @@ body  {
                     $("#getData12").show();
                     $("#getData13").show();
                     $("#getData14").show();
+                    $("#getData15").show();
                     },1000);
                 },
                 
@@ -1818,6 +1877,7 @@ body  {
                     $("#getData12").hide();
                     $("#getData13").hide();
                     $("#getData14").hide();
+                    $("#getData15").hide();
                 },
 
                 complete: function(){
@@ -1837,6 +1897,7 @@ body  {
                     $("#getData12").show();
                     $("#getData13").show();
                     $("#getData14").show();
+                    $("#getData15").show();
                     },1000);
                 },
                 
@@ -1878,6 +1939,7 @@ body  {
                     $("#getData12").hide();
                     $("#getData13").hide();
                     $("#getData14").hide();
+                    $("#getData15").hide();
                 },
 
                 complete: function(){
@@ -1897,6 +1959,69 @@ body  {
                     $("#getData12").show();
                     $("#getData13").show();
                     $("#getData14").show();
+                    $("#getData15").show();
+                    },1000);
+                },
+                
+                success: function(data){
+                },
+
+                error: function(){                 
+                }
+            });           
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+
+        $("#getData15").on("click",function(){
+             
+            
+            url = `/`;
+           
+                $.ajax({
+                type:"GET",
+                url:url,
+                dataType:"json",
+
+                beforeSend: function(){
+                    $("#loader").show();
+                    $("#getData").hide();
+                    $("#getData2").hide();
+                    $("#getData3").hide();
+                    $("#getData4").hide();
+                    $("#getData5").hide();
+                    $("#getData6").hide();
+                    $("#getData7").hide();
+                    $("#getData8").hide();
+                    $("#getData9").hide();
+                    $("#getData10").hide();
+                    $("#getData11").hide();
+                    $("#getData12").hide();
+                    $("#getData13").hide();
+                    $("#getData14").hide();
+                    $("#getData15").hide();
+                },
+
+                complete: function(){
+                    setTimeout(function(){
+                    $("#loader").hide();
+                    $("#getData").show();
+                    $("#getData2").show();
+                    $("#getData3").show();
+                    $("#getData4").show();
+                    $("#getData5").show();
+                    $("#getData6").show();
+                    $("#getData7").show();
+                    $("#getData8").show();
+                    $("#getData9").show();
+                    $("#getData10").show();
+                    $("#getData11").show();
+                    $("#getData12").show();
+                    $("#getData13").show();
+                    $("#getData14").show();
+                    $("#getData15").show();
                     },1000);
                 },
                 

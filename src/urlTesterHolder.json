@@ -11,5 +11,6 @@
     "andcount2": "http://glenmonitormetricsapi.40233306.qpc.hal.davecutting.uk/andTest2?x=",
     "wordlengthcount": "http://glenmonitormetricsapi.40233306.qpc.hal.davecutting.uk/avgwordTest?sentence=",
     "wordlengthcount2": "http://glenmonitormetricsapi.40233306.qpc.hal.davecutting.uk/avgwordTest2?sentence=",
-    "Metricsdatabase": "http://glenmonitormetricsapi.40233306.qpc.hal.davecutting.uk/MonitorStore"
+    "Metricsdatabase": "http://glenmonitormetricsapi.40233306.qpc.hal.davecutting.uk/MonitorStore",
+    "getMetrics": "http://glenmonitormetricsapi.40233306.qpc.hal.davecutting.uk/getTester"
 }
