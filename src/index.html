@@ -813,8 +813,8 @@ body  {
         </div>
     </div>
     <div>
-        <button class="operation" onclick="tester();">Get ID</button>
-        <button class="operation" onclick="getTester();">GET TEXT</button>
+        <button id="getData13" class="operation" onclick="tester();">Get ID</button>
+        <button id="getData14" class="operation" onclick="getTester();">GET TEXT</button>
         <!-- <button class="operation" onclick="Vowelcount();">Vowel Count</button>
         <button class="operation" onclick="Commacount()">Comma Count</button> -->
     </div>
@@ -834,12 +834,12 @@ body  {
         </div> 
     </div>
     <div>
-        <button class="operation" onclick="WordcountTest();">WordCount Monitor + Metrics</button>
-        <button class="operation" onclick="CharcountTest();">CharCount Monitor + Metrics</button>
-        <button class="operation" onclick="CommacountTest();">CommaCount Monitor + Metrics</button>
-        <button class="operation" onclick="VowelcountTest();">VowelCount Monitor + Metrics</button>
-        <button class="operation" onclick="AndcountTest();">AndCount Monitor + Metrics</button>
-        <button class="operation" onclick="AvgcountTest();">AvgCount Monitor + Metrics</button>
+        <button id="getData7" class="operation" onclick="WordcountTest();">WordCount Monitor + Metrics</button>
+        <button id="getData8" class="operation" onclick="CharcountTest();">CharCount Monitor + Metrics</button>
+        <button id="getData9" class="operation" onclick="CommacountTest();">CommaCount Monitor + Metrics</button>
+        <button id="getData10" class="operation" onclick="VowelcountTest();">VowelCount Monitor + Metrics</button>
+        <button id="getData11" class="operation" onclick="AndcountTest();">AndCount Monitor + Metrics</button>
+        <button id="getData12" class="operation" onclick="AvgcountTest();">AvgCount Monitor + Metrics</button>
     </div> 
 </div>  
 
@@ -874,23 +874,39 @@ body  {
 
                 beforeSend: function(){
                     $("#loader").show();
-                    $("#getData2").hide();
                     $("#getData").hide();
-                    $("#getData4").hide();
-                    $("#getData6").hide();
+                    $("#getData2").hide();
                     $("#getData3").hide();
+                    $("#getData4").hide();
                     $("#getData5").hide();
+                    $("#getData6").hide();
+                    $("#getData7").hide();
+                    $("#getData8").hide();
+                    $("#getData9").hide();
+                    $("#getData10").hide();
+                    $("#getData11").hide();
+                    $("#getData12").hide();
+                    $("#getData13").hide();
+                    $("#getData14").hide();
                 },
 
                 complete: function(){
                     setTimeout(function(){
                     $("#loader").hide();
-                    $("#getData2").show();
                     $("#getData").show();
-                    $("#getData4").show();
-                    $("#getData6").show();
+                    $("#getData2").show();
                     $("#getData3").show();
+                    $("#getData4").show();
                     $("#getData5").show();
+                    $("#getData6").show();
+                    $("#getData7").show();
+                    $("#getData8").show();
+                    $("#getData9").show();
+                    $("#getData10").show();
+                    $("#getData11").show();
+                    $("#getData12").show();
+                    $("#getData13").show();
+                    $("#getData14").show();
                     },1000);
                 },
                 
@@ -933,23 +949,39 @@ body  {
 
                 beforeSend: function(){
                     $("#loader").show();
-                    $("#getData2").hide();
                     $("#getData").hide();
-                    $("#getData4").hide();
-                    $("#getData6").hide();
+                    $("#getData2").hide();
                     $("#getData3").hide();
+                    $("#getData4").hide();
                     $("#getData5").hide();
+                    $("#getData6").hide();
+                    $("#getData7").hide();
+                    $("#getData8").hide();
+                    $("#getData9").hide();
+                    $("#getData10").hide();
+                    $("#getData11").hide();
+                    $("#getData12").hide();
+                    $("#getData13").hide();
+                    $("#getData14").hide();
                 },
 
                 complete: function(){
                     setTimeout(function(){
                     $("#loader").hide();
-                    $("#getData2").show();
                     $("#getData").show();
-                    $("#getData4").show();
-                    $("#getData6").show();
+                    $("#getData2").show();
                     $("#getData3").show();
+                    $("#getData4").show();
                     $("#getData5").show();
+                    $("#getData6").show();
+                    $("#getData7").show();
+                    $("#getData8").show();
+                    $("#getData9").show();
+                    $("#getData10").show();
+                    $("#getData11").show();
+                    $("#getData12").show();
+                    $("#getData13").show();
+                    $("#getData14").show();
                     },1000);
                 },
                 
@@ -992,23 +1024,39 @@ body  {
 
                 beforeSend: function(){
                     $("#loader").show();
-                    $("#getData2").hide();
                     $("#getData").hide();
-                    $("#getData4").hide();
-                    $("#getData6").hide();
+                    $("#getData2").hide();
                     $("#getData3").hide();
+                    $("#getData4").hide();
                     $("#getData5").hide();
+                    $("#getData6").hide();
+                    $("#getData7").hide();
+                    $("#getData8").hide();
+                    $("#getData9").hide();
+                    $("#getData10").hide();
+                    $("#getData11").hide();
+                    $("#getData12").hide();
+                    $("#getData13").hide();
+                    $("#getData14").hide();
                 },
 
                 complete: function(){
                     setTimeout(function(){
                     $("#loader").hide();
-                    $("#getData2").show();
                     $("#getData").show();
-                    $("#getData4").show();
-                    $("#getData6").show();
+                    $("#getData2").show();
                     $("#getData3").show();
+                    $("#getData4").show();
                     $("#getData5").show();
+                    $("#getData6").show();
+                    $("#getData7").show();
+                    $("#getData8").show();
+                    $("#getData9").show();
+                    $("#getData10").show();
+                    $("#getData11").show();
+                    $("#getData12").show();
+                    $("#getData13").show();
+                    $("#getData14").show();
                     },1000);
                 },
                 
@@ -1052,27 +1100,42 @@ body  {
                     dataType:"json",
 
                     beforeSend: function(){
-                        $("#loader").show();
-                        $("#getData2").hide();
-                        $("#getData").hide();
-                        $("#getData4").hide();
-                        $("#getData6").hide();
-                        $("#getData3").hide();
-                        $("#getData5").hide();
-                    },
+                    $("#loader").show();
+                    $("#getData").hide();
+                    $("#getData2").hide();
+                    $("#getData3").hide();
+                    $("#getData4").hide();
+                    $("#getData5").hide();
+                    $("#getData6").hide();
+                    $("#getData7").hide();
+                    $("#getData8").hide();
+                    $("#getData9").hide();
+                    $("#getData10").hide();
+                    $("#getData11").hide();
+                    $("#getData12").hide();
+                    $("#getData13").hide();
+                    $("#getData14").hide();
+                },
 
-
-                    complete: function(){
-                        setTimeout(function(){
-                        $("#loader").hide();
-                        $("#getData2").show();
-                        $("#getData").show();
-                        $("#getData4").show();
-                        $("#getData6").show();
-                        $("#getData3").show();
-                        $("#getData5").show();
-                        },1000);
-                    },
+                complete: function(){
+                    setTimeout(function(){
+                    $("#loader").hide();
+                    $("#getData").show();
+                    $("#getData2").show();
+                    $("#getData3").show();
+                    $("#getData4").show();
+                    $("#getData5").show();
+                    $("#getData6").show();
+                    $("#getData7").show();
+                    $("#getData8").show();
+                    $("#getData9").show();
+                    $("#getData10").show();
+                    $("#getData11").show();
+                    $("#getData12").show();
+                    $("#getData13").show();
+                    $("#getData14").show();
+                    },1000);
+                },
                     
                     success: function(data){
                             
@@ -1122,27 +1185,42 @@ body  {
                     dataType:"json",
 
                     beforeSend: function(){
-                        $("#loader").show();
-                        $("#getData2").hide();
-                        $("#getData").hide();
-                        $("#getData4").hide();
-                        $("#getData6").hide();
-                        $("#getData3").hide();
-                        $("#getData5").hide();
-                    },
+                    $("#loader").show();
+                    $("#getData").hide();
+                    $("#getData2").hide();
+                    $("#getData3").hide();
+                    $("#getData4").hide();
+                    $("#getData5").hide();
+                    $("#getData6").hide();
+                    $("#getData7").hide();
+                    $("#getData8").hide();
+                    $("#getData9").hide();
+                    $("#getData10").hide();
+                    $("#getData11").hide();
+                    $("#getData12").hide();
+                    $("#getData13").hide();
+                    $("#getData14").hide();
+                },
 
-
-                    complete: function(){
-                        setTimeout(function(){
-                        $("#loader").hide();
-                        $("#getData2").show();
-                        $("#getData").show();
-                        $("#getData4").show();
-                        $("#getData6").show();
-                        $("#getData3").show();
-                        $("#getData5").show();
-                        },1000);
-                    },
+                complete: function(){
+                    setTimeout(function(){
+                    $("#loader").hide();
+                    $("#getData").show();
+                    $("#getData2").show();
+                    $("#getData3").show();
+                    $("#getData4").show();
+                    $("#getData5").show();
+                    $("#getData6").show();
+                    $("#getData7").show();
+                    $("#getData8").show();
+                    $("#getData9").show();
+                    $("#getData10").show();
+                    $("#getData11").show();
+                    $("#getData12").show();
+                    $("#getData13").show();
+                    $("#getData14").show();
+                    },1000);
+                },
                     
                     success: function(data){
                             
@@ -1191,23 +1269,39 @@ body  {
 
                 beforeSend: function(){
                     $("#loader").show();
-                    $("#getData2").hide();
                     $("#getData").hide();
-                    $("#getData4").hide();
-                    $("#getData6").hide();
+                    $("#getData2").hide();
                     $("#getData3").hide();
+                    $("#getData4").hide();
                     $("#getData5").hide();
+                    $("#getData6").hide();
+                    $("#getData7").hide();
+                    $("#getData8").hide();
+                    $("#getData9").hide();
+                    $("#getData10").hide();
+                    $("#getData11").hide();
+                    $("#getData12").hide();
+                    $("#getData13").hide();
+                    $("#getData14").hide();
                 },
 
                 complete: function(){
                     setTimeout(function(){
                     $("#loader").hide();
-                    $("#getData2").show();
                     $("#getData").show();
-                    $("#getData4").show();
-                    $("#getData6").show();
+                    $("#getData2").show();
                     $("#getData3").show();
+                    $("#getData4").show();
                     $("#getData5").show();
+                    $("#getData6").show();
+                    $("#getData7").show();
+                    $("#getData8").show();
+                    $("#getData9").show();
+                    $("#getData10").show();
+                    $("#getData11").show();
+                    $("#getData12").show();
+                    $("#getData13").show();
+                    $("#getData14").show();
                     },1000);
                 },
                 
@@ -1221,6 +1315,480 @@ body  {
         });
     });
 </script> 
+<script>
+    $(document).ready(function(){
+
+        $("#getData7").on("click",function(){
+             
+            url = `/`;
+                $.ajax({
+                type:"GET",
+                url:url,
+                dataType:"json",
+
+                beforeSend: function(){
+                    $("#loader").show();
+                    $("#getData").hide();
+                    $("#getData2").hide();
+                    $("#getData3").hide();
+                    $("#getData4").hide();
+                    $("#getData5").hide();
+                    $("#getData6").hide();
+                    $("#getData7").hide();
+                    $("#getData8").hide();
+                    $("#getData9").hide();
+                    $("#getData10").hide();
+                    $("#getData11").hide();
+                    $("#getData12").hide();
+                    $("#getData13").hide();
+                    $("#getData14").hide();
+                },
+
+                complete: function(){
+                    setTimeout(function(){
+                    $("#loader").hide();
+                    $("#getData").show();
+                    $("#getData2").show();
+                    $("#getData3").show();
+                    $("#getData4").show();
+                    $("#getData5").show();
+                    $("#getData6").show();
+                    $("#getData7").show();
+                    $("#getData8").show();
+                    $("#getData9").show();
+                    $("#getData10").show();
+                    $("#getData11").show();
+                    $("#getData12").show();
+                    $("#getData13").show();
+                    $("#getData14").show();
+                    },1000);
+                },
+                
+                success: function(data){
+                },
+
+                error: function(){                 
+                }
+            });
+                 
+        });
+    });
+</script> 
+<script>
+    $(document).ready(function(){
+
+        $("#getData8").on("click",function(){
+             
+            url = `/`;
+                $.ajax({
+                type:"GET",
+                url:url,
+                dataType:"json",
+
+                beforeSend: function(){
+                    $("#loader").show();
+                    $("#getData").hide();
+                    $("#getData2").hide();
+                    $("#getData3").hide();
+                    $("#getData4").hide();
+                    $("#getData5").hide();
+                    $("#getData6").hide();
+                    $("#getData7").hide();
+                    $("#getData8").hide();
+                    $("#getData9").hide();
+                    $("#getData10").hide();
+                    $("#getData11").hide();
+                    $("#getData12").hide();
+                    $("#getData13").hide();
+                    $("#getData14").hide();
+                },
+
+                complete: function(){
+                    setTimeout(function(){
+                    $("#loader").hide();
+                    $("#getData").show();
+                    $("#getData2").show();
+                    $("#getData3").show();
+                    $("#getData4").show();
+                    $("#getData5").show();
+                    $("#getData6").show();
+                    $("#getData7").show();
+                    $("#getData8").show();
+                    $("#getData9").show();
+                    $("#getData10").show();
+                    $("#getData11").show();
+                    $("#getData12").show();
+                    $("#getData13").show();
+                    $("#getData14").show();
+                    },1000);
+                },
+                
+                success: function(data){
+                },
+
+                error: function(){                 
+                }
+            });
+                  
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+
+        $("#getData9").on("click",function(){
+             
+            url = `/`;
+                $.ajax({
+                type:"GET",
+                url:url,
+                dataType:"json",
+
+                beforeSend: function(){
+                    $("#loader").show();
+                    $("#getData").hide();
+                    $("#getData2").hide();
+                    $("#getData3").hide();
+                    $("#getData4").hide();
+                    $("#getData5").hide();
+                    $("#getData6").hide();
+                    $("#getData7").hide();
+                    $("#getData8").hide();
+                    $("#getData9").hide();
+                    $("#getData10").hide();
+                    $("#getData11").hide();
+                    $("#getData12").hide();
+                    $("#getData13").hide();
+                    $("#getData14").hide();
+                },
+
+                complete: function(){
+                    setTimeout(function(){
+                    $("#loader").hide();
+                    $("#getData").show();
+                    $("#getData2").show();
+                    $("#getData3").show();
+                    $("#getData4").show();
+                    $("#getData5").show();
+                    $("#getData6").show();
+                    $("#getData7").show();
+                    $("#getData8").show();
+                    $("#getData9").show();
+                    $("#getData10").show();
+                    $("#getData11").show();
+                    $("#getData12").show();
+                    $("#getData13").show();
+                    $("#getData14").show();
+                    },1000);
+                },
+                
+                success: function(data){
+                },
+
+                error: function(){                 
+                }
+            });
+               
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+
+        $("#getData10").on("click",function(){
+             
+                url = `/`;
+                $.ajax({
+                type:"GET",
+                url:url,
+                dataType:"json",
+
+                beforeSend: function(){
+                    $("#loader").show();
+                    $("#getData").hide();
+                    $("#getData2").hide();
+                    $("#getData3").hide();
+                    $("#getData4").hide();
+                    $("#getData5").hide();
+                    $("#getData6").hide();
+                    $("#getData7").hide();
+                    $("#getData8").hide();
+                    $("#getData9").hide();
+                    $("#getData10").hide();
+                    $("#getData11").hide();
+                    $("#getData12").hide();
+                    $("#getData13").hide();
+                    $("#getData14").hide();
+                },
+
+                complete: function(){
+                    setTimeout(function(){
+                    $("#loader").hide();
+                    $("#getData").show();
+                    $("#getData2").show();
+                    $("#getData3").show();
+                    $("#getData4").show();
+                    $("#getData5").show();
+                    $("#getData6").show();
+                    $("#getData7").show();
+                    $("#getData8").show();
+                    $("#getData9").show();
+                    $("#getData10").show();
+                    $("#getData11").show();
+                    $("#getData12").show();
+                    $("#getData13").show();
+                    $("#getData14").show();
+                    },1000);
+                },
+                
+                success: function(data){
+                },
+
+                error: function(){                 
+                }
+            });
+                    
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+
+        $("#getData11").on("click",function(){
+             
+                url = `/`;
+                $.ajax({
+                type:"GET",
+                url:url,
+                dataType:"json",
+
+                beforeSend: function(){
+                    $("#loader").show();
+                    $("#getData").hide();
+                    $("#getData2").hide();
+                    $("#getData3").hide();
+                    $("#getData4").hide();
+                    $("#getData5").hide();
+                    $("#getData6").hide();
+                    $("#getData7").hide();
+                    $("#getData8").hide();
+                    $("#getData9").hide();
+                    $("#getData10").hide();
+                    $("#getData11").hide();
+                    $("#getData12").hide();
+                    $("#getData13").hide();
+                    $("#getData14").hide();
+                },
+
+                complete: function(){
+                    setTimeout(function(){
+                    $("#loader").hide();
+                    $("#getData").show();
+                    $("#getData2").show();
+                    $("#getData3").show();
+                    $("#getData4").show();
+                    $("#getData5").show();
+                    $("#getData6").show();
+                    $("#getData7").show();
+                    $("#getData8").show();
+                    $("#getData9").show();
+                    $("#getData10").show();
+                    $("#getData11").show();
+                    $("#getData12").show();
+                    $("#getData13").show();
+                    $("#getData14").show();
+                    },1000);
+                },
+                
+                success: function(data){
+                },
+
+                error: function(){                 
+                }
+            });           
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+
+        $("#getData12").on("click",function(){
+             
+            
+            url = `/`;
+           
+                $.ajax({
+                type:"GET",
+                url:url,
+                dataType:"json",
+
+                beforeSend: function(){
+                    $("#loader").show();
+                    $("#getData").hide();
+                    $("#getData2").hide();
+                    $("#getData3").hide();
+                    $("#getData4").hide();
+                    $("#getData5").hide();
+                    $("#getData6").hide();
+                    $("#getData7").hide();
+                    $("#getData8").hide();
+                    $("#getData9").hide();
+                    $("#getData10").hide();
+                    $("#getData11").hide();
+                    $("#getData12").hide();
+                    $("#getData13").hide();
+                    $("#getData14").hide();
+                },
+
+                complete: function(){
+                    setTimeout(function(){
+                    $("#loader").hide();
+                    $("#getData").show();
+                    $("#getData2").show();
+                    $("#getData3").show();
+                    $("#getData4").show();
+                    $("#getData5").show();
+                    $("#getData6").show();
+                    $("#getData7").show();
+                    $("#getData8").show();
+                    $("#getData9").show();
+                    $("#getData10").show();
+                    $("#getData11").show();
+                    $("#getData12").show();
+                    $("#getData13").show();
+                    $("#getData14").show();
+                    },1000);
+                },
+                
+                success: function(data){
+                },
+
+                error: function(){                 
+                }
+            });           
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+
+        $("#getData13").on("click",function(){
+             
+            
+            url = `/`;
+           
+                $.ajax({
+                type:"GET",
+                url:url,
+                dataType:"json",
+
+                beforeSend: function(){
+                    $("#loader").show();
+                    $("#getData").hide();
+                    $("#getData2").hide();
+                    $("#getData3").hide();
+                    $("#getData4").hide();
+                    $("#getData5").hide();
+                    $("#getData6").hide();
+                    $("#getData7").hide();
+                    $("#getData8").hide();
+                    $("#getData9").hide();
+                    $("#getData10").hide();
+                    $("#getData11").hide();
+                    $("#getData12").hide();
+                    $("#getData13").hide();
+                    $("#getData14").hide();
+                },
+
+                complete: function(){
+                    setTimeout(function(){
+                    $("#loader").hide();
+                    $("#getData").show();
+                    $("#getData2").show();
+                    $("#getData3").show();
+                    $("#getData4").show();
+                    $("#getData5").show();
+                    $("#getData6").show();
+                    $("#getData7").show();
+                    $("#getData8").show();
+                    $("#getData9").show();
+                    $("#getData10").show();
+                    $("#getData11").show();
+                    $("#getData12").show();
+                    $("#getData13").show();
+                    $("#getData14").show();
+                    },1000);
+                },
+                
+                success: function(data){
+                },
+
+                error: function(){                 
+                }
+            });           
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+
+        $("#getData14").on("click",function(){
+             
+            
+            url = `/`;
+           
+                $.ajax({
+                type:"GET",
+                url:url,
+                dataType:"json",
+
+                beforeSend: function(){
+                    $("#loader").show();
+                    $("#getData").hide();
+                    $("#getData2").hide();
+                    $("#getData3").hide();
+                    $("#getData4").hide();
+                    $("#getData5").hide();
+                    $("#getData6").hide();
+                    $("#getData7").hide();
+                    $("#getData8").hide();
+                    $("#getData9").hide();
+                    $("#getData10").hide();
+                    $("#getData11").hide();
+                    $("#getData12").hide();
+                    $("#getData13").hide();
+                    $("#getData14").hide();
+                },
+
+                complete: function(){
+                    setTimeout(function(){
+                    $("#loader").hide();
+                    $("#getData").show();
+                    $("#getData2").show();
+                    $("#getData3").show();
+                    $("#getData4").show();
+                    $("#getData5").show();
+                    $("#getData6").show();
+                    $("#getData7").show();
+                    $("#getData8").show();
+                    $("#getData9").show();
+                    $("#getData10").show();
+                    $("#getData11").show();
+                    $("#getData12").show();
+                    $("#getData13").show();
+                    $("#getData14").show();
+                    },1000);
+                },
+                
+                success: function(data){
+                },
+
+                error: function(){                 
+                }
+            });           
+        });
+    });
+</script>
 </body>
 
 
