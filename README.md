@@ -1,2 +1,4 @@
-# editor-frontend
+# Cloud computing project
+editor-frontend
+
 
